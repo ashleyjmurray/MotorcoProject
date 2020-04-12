@@ -27,22 +27,18 @@ localacts <- read.csv("LocalActs.csv")
 localacts <- localacts %>%
   mutate(Date = as.character(Date),
          Artist = as.character(Artist))
-
-full <- inner_join(y, localacts)
 ```
 
 ```{r}
 y <- y %>%
   separate(Date, sep="/", into = c("month", "day", "year"))
+yyy <- y %>%
+  mutate(new_year = str_sub(year, 3, -1))
+yyy$Date <- paste0(yyy$month, "/", yyy$day, "/", yyy$new_year)
 ```
 
 ```{r}
-yyy <- y %>%
-  mutate(new_year = str_sub(year, 3, -1))
-```
-
-```{r paste}
-yyy$date <- paste0(yyy$month, "/", yyy$day, "/", yyy$new_year)
+full <- inner_join(yyy, localacts)
 ```
 
 ```{r read-data}
