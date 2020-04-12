@@ -43,3 +43,188 @@ full1 <- inner_join(yyy, localacts, by = c("Date", "Artist"))
 full <- inner_join(full1, daygenre)
 ```
 
+# Exploratory Data Analysis
+
+```{r}
+full <- full %>%
+  mutate(Returning.Act = as.factor(case_when(Returning.Act == "x" ~ 1,
+                               Returning.Act == "" ~ 0)),
+         SPMostPlays.lt1000 = as.factor(SPMostPlays.lt1000),
+         FBFansNC.lt1000 = as.factor(FBFansNC.lt1000),
+         FBFans50Mi.lt1000 = as.factor(FBFans50Mi.lt1000),
+         Seated = as.factor(Seated),
+         SpecialTx = as.factor(SpecialTx),
+         year = as.factor(year),
+         month = as.factor(month),
+         JointEvent = as.factor(JointEvent))
+
+colSums(is.na(full))
+```
+```{r}
+
+p0 <- ggplot(data = full, aes(x = Seated)) +
+  geom_bar()
+
+p1 <- ggplot(data = full, aes(x = month)) +
+  geom_bar()
+
+p2 <- ggplot(data = full, aes(x = year)) +
+  geom_bar()
+
+p3 <- ggplot(data = full, aes(x = SpecialTx)) +
+  geom_bar()
+
+p4 <- ggplot(data = full, aes(x = FBFans50Mi.lt1000)) +
+  geom_bar()
+
+p5 <- ggplot(data = full, aes(x = FBFansNC.lt1000)) +
+  geom_bar()
+
+p6 <- ggplot(data = full, aes(x = PSAvgTix)) +
+  geom_histogram()
+
+p7 <- ggplot(data = full, aes(x = PSAvgGross)) +
+  geom_histogram()
+
+p8 <- ggplot(data = full, aes(x = FBLikes)) +
+  geom_histogram()
+
+p9 <- ggplot(data = full, aes(x = Twitter)) +
+  geom_histogram()
+
+p10 <- ggplot(data = full, aes(x = SPFollowers)) +
+  geom_histogram()
+
+p11 <- ggplot(data = full, aes(x = SPMonthListen)) +
+  geom_histogram()
+
+p12 <- ggplot(data = full, aes(x = SPMostPlays.lt1000)) +
+  geom_bar()
+
+p13 <- ggplot(data = full, aes(x = IGFollowers)) +
+  geom_histogram()
+
+p14 <- ggplot(data = full, aes(x = SKFollowers)) +
+  geom_histogram()
+
+p15 <- ggplot(data = full, aes(x = BandsinTown)) +
+  geom_histogram()
+
+p16 <- ggplot(data = full, aes(x = Bands60Mi)) +
+  geom_histogram()
+
+p17 <- ggplot(data = full, aes(x = YTSubscribers)) +
+  geom_histogram()
+
+p18 <- ggplot(data = full, aes(x = Staff)) +
+  geom_bar()
+
+p18 <- ggplot(data = full, aes(x = JointEvent)) +
+  geom_bar()
+
+p19 <- ggplot(data = full, aes(x = Showtime)) +
+  geom_bar()
+
+p20 <- ggplot(data = full, aes(x = Day)) +
+  geom_bar()
+
+p21 <- ggplot(data = full, aes(x = Genre)) +
+  geom_bar()
+
+p22 <- ggplot(data = full, aes(x = Touring.Local)) +
+  geom_bar()
+
+p23 <- ggplot(data = full, aes(x = Returning.Act)) +
+  geom_bar()
+
+p0 + p1 + p2 + p3 + p4 + p5
+p6 + p7 + p8 + p9 + p10 + p11
+p12 + p13 + p14 + p15 + p16 + p17
+p18 + p19 + p20 + p21 + p22 + p23
+
+
+```
+
+```{r log-graphs}
+
+p6 <- ggplot(data = full, aes(x = log(PSAvgTix))) +
+  geom_histogram()
+
+p7 <- ggplot(data = full, aes(x = log(PSAvgGross))) +
+  geom_histogram()
+
+p8 <- ggplot(data = full, aes(x = log(FBLikes))) +
+  geom_histogram()
+
+p9 <- ggplot(data = full, aes(x = log(Twitter))) +
+  geom_histogram()
+
+p10 <- ggplot(data = full, aes(x = log(SPFollowers))) +
+  geom_histogram()
+
+p11 <- ggplot(data = full, aes(x = log(SPMonthListen))) +
+  geom_histogram()
+
+p13 <- ggplot(data = full, aes(x = log(IGFollowers))) +
+  geom_histogram()
+
+p14 <- ggplot(data = full, aes(x = log(SKFollowers))) +
+  geom_histogram()
+
+p15 <- ggplot(data = full, aes(x = log(BandsinTown))) +
+  geom_histogram()
+
+p16 <- ggplot(data = full, aes(x = log(Bands60Mi))) +
+  geom_histogram()
+
+p17 <- ggplot(data = full, aes(x = log(YTSubscribers))) +
+  geom_histogram()
+
+p6 + p7 + p8 + p9 
+p10 + p11 + p13 + p14 
+p15 + p16 + p17
+```
+
+```{r transform}
+full <- full %>%
+  mutate(logPSAvgTix = log(PSAvgTix),
+         logPSAvgGross = log(PSAvgGross),
+         logFBLikes = log(FBLikes),
+         logTwitter = log(Twitter),
+         logSPFollowers = log(SPFollowers),
+         logSPMonthListen = log(SPMonthListen),
+         logIGFollowers = log(IGFollowers),
+         logSKFollowers = log(SKFollowers),
+         logBandsinTown = log(BandsinTown),
+         logBands60Mi = log(Bands60Mi),
+         logYTSubscribers = log(YTSubscribers))
+
+seated <- full %>%
+  filter(Seated == "Yes") %>%
+  filter(Group != "Test")
+
+standing <- full %>%
+  filter(Seated == "No") %>%
+  filter(Group != "Test")
+```
+
+
+```{r model-selection}
+
+#full_model_seated <- lm(Attend ~  month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + SPMostPlays.lt1000 + logIGFollowers + logSKFollowers + logBandsinTown + logBands60Mi + logYTSubscribers + Staff + JointEvent + Showtime + Day + Genre + Touring.Local + Returning.Act, data = seated)
+
+#full_model_standing <- lm(Attend ~ month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + SPMostPlays.lt1000 + logIGFollowers + logSKFollowers + logBandsinTown + logBands60Mi + logYTSubscribers + Staff + JointEvent + Showtime + Day + Genre + Touring.Local + Returning.Act, data = seated)
+
+#model_select_seat <- step(full_model_seat, direction = "backward")
+#model_select_stand <- step(full_model_stand, direction = "backward")
+
+#tidy(model_select_seat)
+#tidy(model_select_stand)
+```
+
+
+
+
+
+
+
