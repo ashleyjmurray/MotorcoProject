@@ -367,12 +367,12 @@ summary {
 
 
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ── Attaching packages ──────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.0     ✓ purrr   0.3.3
 ## ✓ tibble  3.0.0     ✓ dplyr   0.8.5
 ## ✓ tidyr   1.0.2     ✓ stringr 1.4.0
 ## ✓ readr   1.3.1     ✓ forcats 0.5.0</code></pre>
-<pre><code>## ── Conflicts ───────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ─────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(ggplot2)
@@ -404,23 +404,29 @@ localacts &lt;- localacts %&gt;%
 
 full &lt;- inner_join(y, localacts)</code></pre>
 <pre><code>## Joining, by = c(&quot;Date&quot;, &quot;Artist&quot;)</code></pre>
+<pre class="r"><code>y &lt;- y %&gt;%
+  separate(Date, sep=&quot;/&quot;, into = c(&quot;month&quot;, &quot;day&quot;, &quot;year&quot;))</code></pre>
+<pre class="r"><code>yyy &lt;- y %&gt;%
+  mutate(new_year = str_sub(year, 3, -1))</code></pre>
 <pre class="r"><code>colSums(is.na(y))</code></pre>
-<pre><code>##                Ref               Date             Artist             Attend 
-##                 41                  0                  0                120 
-##            TxPrice          SpecialTx           FBAttend         FBInterest 
-##                  0                  0                 10                 11 
-##          FBInvites         FBFans50Mi           FBFansNC           PSAvgTix 
-##                 42                197                179                138 
-##         PSAvgGross            FBLikes            Twitter        SPFollowers 
-##                138                 47                 81                 91 
-##      SPMonthListen        SPMostPlays        IGFollowers        SKFollowers 
-##                 95                102                 98                 73 
-##        BandsinTown          Bands60Mi      YTSubscribers             Seated 
-##                 71                 14                134                  0 
-##           Capacity              Staff         JointEvent              Group 
+<pre><code>##                Ref              month                day               year 
+##                 41                  0                  0                  0 
+##             Artist             Attend            TxPrice          SpecialTx 
+##                  0                120                  0                  0 
+##           FBAttend         FBInterest          FBInvites         FBFans50Mi 
+##                 10                 11                 42                197 
+##           FBFansNC           PSAvgTix         PSAvgGross            FBLikes 
+##                179                138                138                 47 
+##            Twitter        SPFollowers      SPMonthListen        SPMostPlays 
+##                 81                 91                 95                102 
+##        IGFollowers        SKFollowers        BandsinTown          Bands60Mi 
+##                 98                 73                 71                 14 
+##      YTSubscribers             Seated           Capacity              Staff 
+##                134                  0                  0                  0 
+##         JointEvent              Group  FBFans50Mi.lt1000    FBFansNC.lt1000 
 ##                  0                  0                  0                  0 
-##  FBFans50Mi.lt1000    FBFansNC.lt1000 SPMostPlays.lt1000           recordID 
-##                  0                  0                  0                  0</code></pre>
+## SPMostPlays.lt1000           recordID 
+##                  0                  0</code></pre>
 
 
 

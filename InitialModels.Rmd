@@ -31,6 +31,16 @@ localacts <- localacts %>%
 full <- inner_join(y, localacts)
 ```
 
+```{r}
+y <- y %>%
+  separate(Date, sep="/", into = c("month", "day", "year"))
+```
+
+```{r}
+yyy <- y %>%
+  mutate(new_year = str_sub(year, 3, -1))
+```
+
 ```{r read-data}
 colSums(is.na(y))
 ```
