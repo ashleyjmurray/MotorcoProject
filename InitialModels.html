@@ -407,33 +407,9 @@ localacts &lt;- localacts %&gt;%
 yyy &lt;- y %&gt;%
   mutate(new_year = str_sub(year, 3, -1))
 yyy$Date &lt;- paste0(yyy$month, &quot;/&quot;, yyy$day, &quot;/&quot;, yyy$new_year)</code></pre>
-<<<<<<< HEAD
-<pre class="r"><code>full1 &lt;- inner_join(yyy, localacts, by = &quot;Date&quot;, &quot;Artist&quot;)
-full &lt;- inner_join(full1, daygenre, by = &quot;Date&quot;, &quot;Artist&quot;)</code></pre>
-=======
 <pre class="r"><code>full1 &lt;- inner_join(yyy, localacts, by = c(&quot;Date&quot;, &quot;Artist&quot;))
 full &lt;- inner_join(full1, daygenre)</code></pre>
 <pre><code>## Joining, by = c(&quot;Artist&quot;, &quot;Date&quot;)</code></pre>
->>>>>>> 57375ae62d8fa8984849ace5879bea6fe03298ec
-<pre class="r"><code>colSums(is.na(y))</code></pre>
-<pre><code>##                Ref              month                day               year 
-##                 41                  0                  0                  0 
-##             Artist             Attend            TxPrice          SpecialTx 
-##                  0                120                  0                  0 
-##           FBAttend         FBInterest          FBInvites         FBFans50Mi 
-##                 10                 11                 42                197 
-##           FBFansNC           PSAvgTix         PSAvgGross            FBLikes 
-##                179                138                138                 47 
-##            Twitter        SPFollowers      SPMonthListen        SPMostPlays 
-##                 81                 91                 95                102 
-##        IGFollowers        SKFollowers        BandsinTown          Bands60Mi 
-##                 98                 73                 71                 14 
-##      YTSubscribers             Seated           Capacity              Staff 
-##                134                  0                  0                  0 
-##         JointEvent              Group  FBFans50Mi.lt1000    FBFansNC.lt1000 
-##                  0                  0                  0                  0 
-## SPMostPlays.lt1000           recordID 
-##                  0                  0</code></pre>
 
 
 
