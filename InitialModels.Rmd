@@ -19,6 +19,7 @@ library(patchwork)
 
 ```{r}
 load("PrimaryData-3.RData")
+daygenre <- read.csv("DayAndGenre.csv")
 ```
 
 ```{r read-data}
