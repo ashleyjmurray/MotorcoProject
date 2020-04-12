@@ -400,10 +400,13 @@ daygenre &lt;- daygenre %&gt;%
 localacts &lt;- read.csv(&quot;LocalActs.csv&quot;)
 localacts &lt;- localacts %&gt;%
   mutate(Date = as.character(Date),
-         Artist = as.character(Artist))
+         Artist = as.character(Artist),
+         Ref = Reference..)
 
-full &lt;- inner_join(y, localacts)</code></pre>
+full &lt;- inner_join(daygenre, localacts)</code></pre>
 <pre><code>## Joining, by = c(&quot;Date&quot;, &quot;Artist&quot;)</code></pre>
+<pre class="r"><code>full &lt;- inner_join(full, y)</code></pre>
+<pre><code>## Joining, by = c(&quot;Date&quot;, &quot;Artist&quot;, &quot;Ref&quot;)</code></pre>
 <pre class="r"><code>colSums(is.na(y))</code></pre>
 <pre><code>##                Ref               Date             Artist             Attend 
 ##                 41                  0                  0                120 

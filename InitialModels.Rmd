@@ -26,9 +26,11 @@ daygenre <- daygenre %>%
 localacts <- read.csv("LocalActs.csv")
 localacts <- localacts %>%
   mutate(Date = as.character(Date),
-         Artist = as.character(Artist))
+         Artist = as.character(Artist),
+         Ref = Reference..)
 
-full <- inner_join(y, localacts)
+full <- inner_join(daygenre, localacts)
+full <- inner_join(full, y)
 ```
 
 ```{r read-data}
