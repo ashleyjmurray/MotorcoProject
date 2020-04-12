@@ -20,6 +20,15 @@ library(patchwork)
 ```{r}
 load("PrimaryData-3.RData")
 daygenre <- read.csv("DayAndGenre.csv")
+daygenre <- daygenre %>%
+  mutate(Date = as.character(Date),
+        Artist = as.character(Artists))
+localacts <- read.csv("LocalActs.csv")
+localacts <- localacts %>%
+  mutate(Date = as.character(Date),
+         Artist = as.character(Artist))
+
+full <- inner_join(y, localacts)
 ```
 
 ```{r read-data}
