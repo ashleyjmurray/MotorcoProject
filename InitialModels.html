@@ -367,12 +367,12 @@ summary {
 
 
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ── Attaching packages ──────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.0     ✓ purrr   0.3.3
 ## ✓ tibble  3.0.0     ✓ dplyr   0.8.5
 ## ✓ tidyr   1.0.2     ✓ stringr 1.4.0
 ## ✓ readr   1.3.1     ✓ forcats 0.5.0</code></pre>
-<pre><code>## ── Conflicts ───────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ─────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(ggplot2)
@@ -407,9 +407,9 @@ localacts &lt;- localacts %&gt;%
 yyy &lt;- y %&gt;%
   mutate(new_year = str_sub(year, 3, -1))
 yyy$Date &lt;- paste0(yyy$month, &quot;/&quot;, yyy$day, &quot;/&quot;, yyy$new_year)</code></pre>
-<pre class="r"><code>full1 &lt;- inner_join(yyy, localacts, by = &quot;Date&quot;)
+<pre class="r"><code>full1 &lt;- inner_join(yyy, localacts, by = c(&quot;Date&quot;, &quot;Artist&quot;))
 full &lt;- inner_join(full1, daygenre)</code></pre>
-<pre><code>## Joining, by = &quot;Date&quot;</code></pre>
+<pre><code>## Joining, by = c(&quot;Artist&quot;, &quot;Date&quot;)</code></pre>
 <pre class="r"><code>colSums(is.na(y))</code></pre>
 <pre><code>##                Ref              month                day               year 
 ##                 41                  0                  0                  0 

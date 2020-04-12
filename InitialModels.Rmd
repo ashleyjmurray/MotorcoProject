@@ -39,7 +39,7 @@ yyy$Date <- paste0(yyy$month, "/", yyy$day, "/", yyy$new_year)
 ```
 
 ```{r}
-full1 <- inner_join(yyy, localacts, by = "Date")
+full1 <- inner_join(yyy, localacts, by = c("Date", "Artist"))
 full <- inner_join(full1, daygenre)
 ```
 
