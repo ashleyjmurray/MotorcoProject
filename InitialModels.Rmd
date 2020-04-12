@@ -28,10 +28,24 @@ localacts <- localacts %>%
   mutate(Date = as.character(Date),
          Artist = as.character(Artist),
          Ref = Reference..)
+```
 
+```{r}
+y <- y %>%
+  separate(Date, sep="/", into = c("month", "day", "year"))
+```
+
+```{r}
+yyy <- y %>%
+  mutate(new_year = str_sub(year, 3, -1))
+```
+
+
+```{r}
 full <- inner_join(daygenre, localacts)
 full <- inner_join(full, y)
 ```
+
 
 ```{r read-data}
 colSums(is.na(y))
