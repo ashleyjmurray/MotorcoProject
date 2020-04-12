@@ -42,8 +42,7 @@ yyy <- y %>%
 ```
 
 ```{r paste}
-yyy$edit <- paste(yyy$month, "/", yyy$day)
-yyy$date <- paste(yyy$edit, "/", yyy$new_year)
+yyy$date <- paste0(yyy$month, "/", yyy$day, "/", yyy$new_year)
 ```
 
 ```{r read-data}
