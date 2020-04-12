@@ -41,6 +41,11 @@ yyy <- y %>%
   mutate(new_year = str_sub(year, 3, -1))
 ```
 
+```{r paste}
+yyy$edit <- paste(yyy$month, "/", yyy$day)
+yyy$date <- paste(yyy$edit, "/", yyy$new_year)
+```
+
 ```{r read-data}
 colSums(is.na(y))
 ```
