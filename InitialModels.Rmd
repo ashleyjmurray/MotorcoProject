@@ -42,7 +42,7 @@ yyy <- y %>%
 
 
 ```{r}
-yyy$date <- paste0(yyy$month, "/", yyy$day, "/", yyy$new_year)
+yyy$Date <- paste0(yyy$month, "/", yyy$day, "/", yyy$new_year)
 
 ```
 
