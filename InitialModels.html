@@ -401,17 +401,15 @@ localacts &lt;- read.csv(&quot;LocalActs.csv&quot;)
 localacts &lt;- localacts %&gt;%
   mutate(Date = as.character(Date),
          Artist = as.character(Artist),
-         Ref = Reference..)
-
-full &lt;- inner_join(daygenre, localacts)</code></pre>
-<pre><code>## Joining, by = c(&quot;Date&quot;, &quot;Artist&quot;)</code></pre>
-<pre class="r"><code>full &lt;- inner_join(full, y)</code></pre>
-<pre><code>## Joining, by = c(&quot;Date&quot;, &quot;Artist&quot;, &quot;Ref&quot;)</code></pre>
+         Ref = Reference..)</code></pre>
 <pre class="r"><code>y &lt;- y %&gt;%
-  separate(Date, sep=&quot;/&quot;, into = c(&quot;month&quot;, &quot;day&quot;, &quot;year&quot;))</code></pre>
-<pre class="r"><code>yyy &lt;- y %&gt;%
-  mutate(new_year = str_sub(year, 3, -1))</code></pre>
-<pre class="r"><code>yyy$date &lt;- paste0(yyy$month, &quot;/&quot;, yyy$day, &quot;/&quot;, yyy$new_year)</code></pre>
+  separate(Date, sep=&quot;/&quot;, into = c(&quot;month&quot;, &quot;day&quot;, &quot;year&quot;))
+yyy &lt;- y %&gt;%
+  mutate(new_year = str_sub(year, 3, -1))
+yyy$Date &lt;- paste0(yyy$month, &quot;/&quot;, yyy$day, &quot;/&quot;, yyy$new_year)</code></pre>
+<pre class="r"><code>full1 &lt;- inner_join(yyy, localacts, by = &quot;Date&quot;)
+full &lt;- inner_join(full1, daygenre)</code></pre>
+<pre><code>## Joining, by = &quot;Date&quot;</code></pre>
 <pre class="r"><code>colSums(is.na(y))</code></pre>
 <pre><code>##                Ref              month                day               year 
 ##                 41                  0                  0                  0 

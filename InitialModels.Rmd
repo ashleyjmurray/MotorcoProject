@@ -33,25 +33,15 @@ localacts <- localacts %>%
 ```{r}
 y <- y %>%
   separate(Date, sep="/", into = c("month", "day", "year"))
-```
-
-```{r}
 yyy <- y %>%
   mutate(new_year = str_sub(year, 3, -1))
-```
-
-
-```{r}
 yyy$Date <- paste0(yyy$month, "/", yyy$day, "/", yyy$new_year)
-
 ```
 
 ```{r}
-two <- inner_join(daygenre, localacts, by = "Date")
-full <- inner_join(two, y, by = Date)
+full1 <- inner_join(yyy, localacts, by = "Date")
+full <- inner_join(full1, daygenre)
 ```
-
-
 
 ```{r read-data}
 colSums(is.na(y))
