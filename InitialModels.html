@@ -407,9 +407,8 @@ localacts &lt;- localacts %&gt;%
 yyy &lt;- y %&gt;%
   mutate(new_year = str_sub(year, 3, -1))
 yyy$Date &lt;- paste0(yyy$month, &quot;/&quot;, yyy$day, &quot;/&quot;, yyy$new_year)</code></pre>
-<pre class="r"><code>full1 &lt;- inner_join(yyy, localacts, by = &quot;Date&quot;)
-full &lt;- inner_join(full1, daygenre)</code></pre>
-<pre><code>## Joining, by = &quot;Date&quot;</code></pre>
+<pre class="r"><code>full1 &lt;- inner_join(yyy, localacts, by = &quot;Date&quot;, &quot;Artist&quot;)
+full &lt;- inner_join(full1, daygenre, by = &quot;Date&quot;, &quot;Artist&quot;)</code></pre>
 <pre class="r"><code>colSums(is.na(y))</code></pre>
 <pre><code>##                Ref              month                day               year 
 ##                 41                  0                  0                  0 
