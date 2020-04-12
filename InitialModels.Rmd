@@ -12,4 +12,11 @@ library(tidyverse)
 library(ggplot2)
 library(caret)
 library(caretEnsemble)
+library(knitr)
+library(broom)
+library(patchwork)
+```
+
+```{r read-data}
+
 ```
