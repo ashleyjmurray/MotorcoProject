@@ -40,16 +40,16 @@ yyy <- y %>%
   mutate(new_year = str_sub(year, 3, -1))
 ```
 
-```{r paste}
-yyy$edit <- paste(yyy$month, "/", yyy$day)
-yyy$Date <- paste(yyy$edit, "/", yyy$new_year)
+
+```{r}
+yyy$date <- paste0(yyy$month, "/", yyy$day, "/", yyy$new_year)
+
 ```
 
 ```{r}
 two <- inner_join(daygenre, localacts, by = "Date")
 full <- inner_join(two, y, by = Date)
 ```
-
 
 
 

@@ -411,8 +411,7 @@ full &lt;- inner_join(daygenre, localacts)</code></pre>
   separate(Date, sep=&quot;/&quot;, into = c(&quot;month&quot;, &quot;day&quot;, &quot;year&quot;))</code></pre>
 <pre class="r"><code>yyy &lt;- y %&gt;%
   mutate(new_year = str_sub(year, 3, -1))</code></pre>
-<pre class="r"><code>yyy$edit &lt;- paste(yyy$month, &quot;/&quot;, yyy$day)
-yyy$date &lt;- paste(yyy$edit, &quot;/&quot;, yyy$new_year)</code></pre>
+<pre class="r"><code>yyy$date &lt;- paste0(yyy$month, &quot;/&quot;, yyy$day, &quot;/&quot;, yyy$new_year)</code></pre>
 <pre class="r"><code>colSums(is.na(y))</code></pre>
 <pre><code>##                Ref              month                day               year 
 ##                 41                  0                  0                  0 
