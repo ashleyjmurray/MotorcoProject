@@ -17,6 +17,10 @@ library(broom)
 library(patchwork)
 ```
 
-```{r read-data}
+```{r}
+load("PrimaryData-3.RData")
+```
 
+```{r read-data}
+colSums(is.na(y))
 ```

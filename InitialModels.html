@@ -392,6 +392,24 @@ library(caret)</code></pre>
 <pre class="r"><code>library(knitr)
 library(broom)
 library(patchwork)</code></pre>
+<pre class="r"><code>load(&quot;PrimaryData-3.RData&quot;)</code></pre>
+<pre class="r"><code>colSums(is.na(y))</code></pre>
+<pre><code>##                Ref               Date             Artist             Attend 
+##                 41                  0                  0                120 
+##            TxPrice          SpecialTx           FBAttend         FBInterest 
+##                  0                  0                 10                 11 
+##          FBInvites         FBFans50Mi           FBFansNC           PSAvgTix 
+##                 42                197                179                138 
+##         PSAvgGross            FBLikes            Twitter        SPFollowers 
+##                138                 47                 81                 91 
+##      SPMonthListen        SPMostPlays        IGFollowers        SKFollowers 
+##                 95                102                 98                 73 
+##        BandsinTown          Bands60Mi      YTSubscribers             Seated 
+##                 71                 14                134                  0 
+##           Capacity              Staff         JointEvent              Group 
+##                  0                  0                  0                  0 
+##  FBFans50Mi.lt1000    FBFansNC.lt1000 SPMostPlays.lt1000           recordID 
+##                  0                  0                  0                  0</code></pre>
 
 
 
