@@ -198,7 +198,8 @@ full <- full %>%
          logSKFollowers = log(SKFollowers),
          logBandsinTown = log(BandsinTown),
          logBands60Mi = log(Bands60Mi),
-         logYTSubscribers = log(YTSubscribers))
+         logYTSubscribers = log(YTSubscribers)
+         )
 
 seated <- full %>%
   filter(Seated == "Yes") %>%
@@ -250,5 +251,29 @@ model_select_standing <- step(full_model_standing, direction = "backward")
 #tidy(model_select_seated)
 tidy(model_select_standing)
 ```
+
+## Random Forest
+
+```{r random-forest-starting}
+library(randomForest)
+#split into Train and Validation sets
+set.seed(100)
+train <- sample(nrow(full), 0.7*nrow(full), replace = FALSE)
+TrainSet <- full[train,]
+ValidSet <- full[-train,]
+summary(TrainSet)
+summary(ValidSet)
+```
+
+
+```{r create-random-forest}
+model1 <- randomForest(Attend ~., data = TrainSet, importance = TRUE)
+```
+
+
+
+
+
+
 
 
