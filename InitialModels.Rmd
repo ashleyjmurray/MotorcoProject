@@ -239,32 +239,9 @@ full_model <- lm(Attend ~ . , data=mice_complete)
 tidy(full_model)
 ```
 
-```{r removed-some-variables}
-#full_model_seated <- lm(Attend ~ month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + logIGFollowers + logSKFollowers + logBandsinTown+ logBands60Mi + Staff + JointEvent + Showtime + Day + Genre + Returning.Act, data = seated)
-```
-
-```{r}
-#standing$logBands60Mi[which(is.nan(standing$logBands60Mi))] = NA
-#standing$logBands60Mi[which(standing$logBands60Mi==Inf)] = NA
-#standing$logBands60Mi[which(standing$logBands60Mi==-Inf)] = NA
-#standing$logTwitter[which(is.nan(standing$logTwitter))] = NA
-#standing$logTwitter[which(standing$logTwitter==Inf)] = NA
-#standing$logTwitter[which(standing$logTwitter==-Inf)] = NA
-
-#standing$logPSAvgTix[which(is.nan(standing$logPSAvgTix))] = NA
-#standing$logBands60Mi[which(standing$logBands60Mi==Inf)] = NA
-#standing$logBands60Mi[which(standing$logBands60Mi==-Inf)] = NA
-```
-
-```{r standing}
-#full_model_standing <- lm(Attend ~ month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + logIGFollowers + logSKFollowers + logBandsinTown + logBands60Mi + Staff + JointEvent + Showtime + Day + Genre + Returning.Act, data = standing)
-```
-
 ```{r aic-model-selection}
-#model_select_seated <- step(full_model_seated, direction = "backward")
-#model_select_standing <- step(full_model_standing, direction = "backward")
-#tidy(model_select_seated)
-#tidy(model_select_standing)
+model_selected <- step(full_model, direction = "backward")
+tidy(model_selected)
 ```
 
 ## Random Forest
@@ -273,7 +250,7 @@ tidy(full_model)
 library(randomForest)
 #split into Train and Validation sets
 set.seed(100)
-train <- sample(nrow(notest), 0.7*nrow(notest), replace = FALSE)
+train <- sample(nrow(mice_complete), 0.7*nrow(mice_complete), replace = FALSE)
 TrainSet <- notest[train,]
 ValidSet <- notest[-train,]
 summary(TrainSet)
@@ -282,7 +259,7 @@ summary(ValidSet)
 
 
 ```{r create-random-forest}
-#model1 <- randomForest(Attend ~., data = TrainSet, importance = TRUE)
+model1 <- randomForest(Attend ~., data = TrainSet, importance = TRUE)
 ```
 
 
