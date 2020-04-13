@@ -1,5 +1,5 @@
 ---
-title: "InitialModels"
+title: "Initial Models"
 output: html_document
 ---
 
