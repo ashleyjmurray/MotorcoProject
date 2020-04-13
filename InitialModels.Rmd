@@ -209,7 +209,7 @@ standing <- full %>%
   filter(Seated == "No") %>%
   filter(Group != "Test")
 
-dropped <-select(full,-c("Ref.x", "day", "Artist", "TxPrice", "FBAttend", "FBInterest", "FBInvites", "FBFans50Mi", "FBFansNC", "SPMostPlays", "recordID", "new_year", "Date", "Reference..", "Ref.y", "Artists", "Bands60Mi"))
+dropped <-select(full,-c("Ref.x", "day", "Artist", "TxPrice", "FBAttend", "FBInterest", "FBInvites", "FBFans50Mi", "FBFansNC", "SPMostPlays", "recordID", "new_year", "Date", "Reference..", "Ref.y", "Artists", "Bands60Mi", "PSAvgTix", "PSAvgGross", "FBLikes", "Twitter", "SPFollowers", "SPMonthListen", "IGFollowers", "SKFollowers", "BandsinTown", "YTSubscribers"))
 
 notest <- dropped %>%
   filter(Group != "Test")
@@ -235,7 +235,7 @@ colSums(is.na(mice_complete))
 #tidy(model_select_seat)
 #tidy(model_select_stand)
 
-full_model <- lm(Attend ~ . , data=mice_complete)
+full_model <- lm(Attend ~ . -Group  , data=mice_complete)
 tidy(full_model)
 ```
 
@@ -243,6 +243,12 @@ tidy(full_model)
 model_selected <- step(full_model, direction = "backward")
 tidy(model_selected)
 ```
+
+```{r vif}
+library(rms)
+tidy(vif(model_selected))
+```
+
 
 ## Random Forest
 
