@@ -235,7 +235,7 @@ colSums(is.na(mice_complete))
 #tidy(model_select_seat)
 #tidy(model_select_stand)
 
-full_model <- lm(Attend ~ . -Group  , data=mice_complete)
+full_model <- lm(Attend ~ . -Group, data=mice_complete)
 tidy(full_model)
 ```
 
@@ -247,6 +247,11 @@ tidy(model_selected)
 ```{r vif}
 library(rms)
 tidy(vif(model_selected))
+```
+```{r interactions}
+model_int <- lm(Attend ~ (Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen)*Capacity, data = mice_complete)
+tidy(model_int)
+anova(model_selected, model_int, test = "Chisq")
 ```
 
 
