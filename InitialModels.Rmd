@@ -208,6 +208,9 @@ seated <- full %>%
 standing <- full %>%
   filter(Seated == "No") %>%
   filter(Group != "Test")
+
+notest <- full %>%
+  filter(Group != "Test")
 ```
 
 
@@ -258,9 +261,9 @@ tidy(model_select_standing)
 library(randomForest)
 #split into Train and Validation sets
 set.seed(100)
-train <- sample(nrow(full), 0.7*nrow(full), replace = FALSE)
-TrainSet <- full[train,]
-ValidSet <- full[-train,]
+train <- sample(nrow(notest), 0.7*nrow(notest), replace = FALSE)
+TrainSet <- notest[train,]
+ValidSet <- notest[-train,]
 summary(TrainSet)
 summary(ValidSet)
 ```
