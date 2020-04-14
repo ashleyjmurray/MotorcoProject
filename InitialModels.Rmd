@@ -209,25 +209,33 @@ standing <- full %>%
   filter(Seated == "No") %>%
   filter(Group != "Test")
 
-dropped <-select(full,-c("Ref.x", "day", "Artist", "TxPrice", "FBAttend", "FBInterest", "FBInvites", "FBFans50Mi", "FBFansNC", "SPMostPlays", "new_year", "Date", "Reference..", "Ref.y", "Artists", "Bands60Mi", "PSAvgTix", "PSAvgGross", "FBLikes", "Twitter", "SPFollowers", "SPMonthListen", "IGFollowers", "SKFollowers", "BandsinTown", "YTSubscribers"))
+dropped <-select(full,-c("Ref.x", "day", "Artist", "TxPrice", "FBAttend", "FBInterest", "FBInvites", "FBFans50Mi", "FBFansNC", "SPMostPlays", "recordID", "new_year", "Date", "Reference..", "Ref.y", "Artists", "Bands60Mi", "PSAvgTix", "PSAvgGross", "FBLikes", "Twitter", "SPFollowers", "SPMonthListen", "IGFollowers", "SKFollowers", "BandsinTown", "YTSubscribers"))
 
 notest <- dropped %>%
   filter(Group != "Test")
 ```
 
 ```{r missing-data}
-set.seed(1234)
 library(mice)
-mice_mod <- mice(dropped, method='rf')
-mice_full <- complete(mice_mod)
-mice_complete <- mice_full %>%
-  filter(Group != "Test")
+mice_mod <- mice(notest, method='rf')
+mice_complete <- complete(mice_mod)
 
 colSums(is.na(mice_complete))
 ```
 
 ```{r model-selection}
-full_model <- lm(Attend ~ . -Group -recordID, data=mice_complete)
+
+#full_model_seated <- lm(Attend ~  month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + SPMostPlays.lt1000 + logIGFollowers + logSKFollowers + logBandsinTown + logBands60Mi + logYTSubscribers + Staff + JointEvent + Showtime + Day + Genre + Touring.Local + Returning.Act, data = seated)
+
+#full_model_standing <- lm(Attend ~ month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + SPMostPlays.lt1000 + logIGFollowers + logSKFollowers + logBandsinTown + logBands60Mi + logYTSubscribers + Staff + JointEvent + Showtime + Day + Genre + Touring.Local + Returning.Act, data = seated)
+
+#model_select_seat <- step(full_model_seat, direction = "backward")
+#model_select_stand <- step(full_model_stand, direction = "backward")
+
+#tidy(model_select_seat)
+#tidy(model_select_stand)
+
+full_model <- lm(Attend ~ . -Group, data=mice_complete)
 tidy(full_model)
 ```
 
@@ -242,11 +250,12 @@ tidy(vif(model_selected))
 ```
 
 ```{r interactions}
-model_int <- lm(Attend ~ (Capacity + FBFansNC.lt1000 + SPMostPlays.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logTwitter + logSPFollowers + logYTSubscribers)*Capacity, data = mice_complete)
+model_int <- lm(Attend ~ (Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen)*Capacity, data = mice_complete)
 tidy(model_int)
 anova(model_selected, model_int, test = "Chisq")
 ```
 
+<<<<<<< HEAD
 ```{r prediction}
 
 test <- mice_full %>%
@@ -258,6 +267,8 @@ estimate_simp <- test %>%
   mutate(predicted = as.integer(predict(model_selected, test)))
 ```
 
+=======
+>>>>>>> be88779378d42246064324e60afe74cd7b5c49ea
 ## Random Forest
 
 ```{r convert}
@@ -278,7 +289,7 @@ ValidSet <- mice_complete[-train,]
 ```
 
 ```{r create-random-forest}
-forest_model <- randomForest(Attend ~. - Group - recordID, data = TrainSet, importance = TRUE)
+forest_model <- randomForest(Attend ~., data = TrainSet, importance = TRUE)
 ```
 
 ```{r}
@@ -303,5 +314,4 @@ testPred <- all %>%
   select("recordID", "PredAttend", "PredAttend.Basic")
 
 ```
-
 
