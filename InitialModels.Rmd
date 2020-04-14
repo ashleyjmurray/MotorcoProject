@@ -209,13 +209,14 @@ standing <- full %>%
   filter(Seated == "No") %>%
   filter(Group != "Test")
 
-dropped <-select(full,-c("Ref.x", "day", "Artist", "TxPrice", "FBAttend", "FBInterest", "FBInvites", "FBFans50Mi", "FBFansNC", "SPMostPlays", "recordID", "new_year", "Date", "Reference..", "Ref.y", "Artists", "Bands60Mi", "PSAvgTix", "PSAvgGross", "FBLikes", "Twitter", "SPFollowers", "SPMonthListen", "IGFollowers", "SKFollowers", "BandsinTown", "YTSubscribers"))
+dropped <-select(full,-c("Ref.x", "day", "Artist", "TxPrice", "FBAttend", "FBInterest", "FBInvites", "FBFans50Mi", "FBFansNC", "SPMostPlays", "new_year", "Date", "Reference..", "Ref.y", "Artists", "Bands60Mi", "PSAvgTix", "PSAvgGross", "FBLikes", "Twitter", "SPFollowers", "SPMonthListen", "IGFollowers", "SKFollowers", "BandsinTown", "YTSubscribers"))
 
 notest <- dropped %>%
   filter(Group != "Test")
 ```
 
 ```{r missing-data}
+set.seed(1234)
 library(mice)
 mice_mod <- mice(dropped, method='rf')
 mice_full <- complete(mice_mod)
@@ -226,7 +227,7 @@ colSums(is.na(mice_complete))
 ```
 
 ```{r model-selection}
-full_model <- lm(Attend ~ . -Group, data=mice_complete)
+full_model <- lm(Attend ~ . -Group -recordID, data=mice_complete)
 tidy(full_model)
 ```
 
@@ -240,7 +241,7 @@ library(rms)
 tidy(vif(model_selected))
 ```
 ```{r interactions}
-model_int <- lm(Attend ~ (Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen)*Capacity, data = mice_complete)
+model_int <- lm(Attend ~ (Capacity + FBFansNC.lt1000 + SPMostPlays.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logTwitter + logSPFollowers + logYTSubscribers)*Capacity, data = mice_complete)
 tidy(model_int)
 anova(model_selected, model_int, test = "Chisq")
 ```
@@ -254,12 +255,11 @@ anova(model_selected, model_int, test = "Chisq")
 #mod <- lm(Attend ~ Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen, data = train)
 #(rmse_test1 <- rmse(mod, test))
 
-set.seed(123)
-train.control <- trainControl(method = "repeatedcv", 
-                              number = 10, repeats = 10)
+#train.control <- trainControl(method = "repeatedcv", 
+                             # number = 10, repeats = 10)
 # Train the model
-model <- train(Attend ~ Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen, data = mice_complete, method = "lm",
-               trControl = train.control)
+#model <- train(Attend ~ Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen, data = mice_complete, method = "lm",
+              # trControl = train.control)
 ```
 
 ```{r prediction}
@@ -267,7 +267,10 @@ model <- train(Attend ~ Capacity + FBFansNC.lt1000 + Touring.Local + Day + Retur
 test <- mice_full %>%
   filter(Group == "Test")
 
-predict(model_selected, test)
+as.integer(predict(model_selected, test))
+                       
+estimate_simp <- test %>%
+  mutate(predicted = as.integer(predict(model_selected, test)))
 ```
 
 
