@@ -224,17 +224,6 @@ colSums(is.na(mice_complete))
 ```
 
 ```{r model-selection}
-
-#full_model_seated <- lm(Attend ~  month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + SPMostPlays.lt1000 + logIGFollowers + logSKFollowers + logBandsinTown + logBands60Mi + logYTSubscribers + Staff + JointEvent + Showtime + Day + Genre + Touring.Local + Returning.Act, data = seated)
-
-#full_model_standing <- lm(Attend ~ month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + SPMostPlays.lt1000 + logIGFollowers + logSKFollowers + logBandsinTown + logBands60Mi + logYTSubscribers + Staff + JointEvent + Showtime + Day + Genre + Touring.Local + Returning.Act, data = seated)
-
-#model_select_seat <- step(full_model_seat, direction = "backward")
-#model_select_stand <- step(full_model_stand, direction = "backward")
-
-#tidy(model_select_seat)
-#tidy(model_select_stand)
-
 full_model <- lm(Attend ~ . -Group, data=mice_complete)
 tidy(full_model)
 ```
@@ -255,7 +244,6 @@ tidy(model_int)
 anova(model_selected, model_int, test = "Chisq")
 ```
 
-<<<<<<< HEAD
 ```{r prediction}
 
 test <- mice_full %>%
@@ -267,8 +255,6 @@ estimate_simp <- test %>%
   mutate(predicted = as.integer(predict(model_selected, test)))
 ```
 
-=======
->>>>>>> be88779378d42246064324e60afe74cd7b5c49ea
 ## Random Forest
 
 ```{r convert}
@@ -304,14 +290,18 @@ estimate <- test %>%
   mutate(predicted_simp = as.integer(predict(model_selected, test)),
          predicted_comp = as.integer(predict(forest_model, test, type = "class")))
 
-all <- inner_join(testPred, estimate)
-
-all <- all %>%
+all <- estimate %>%
   mutate(PredAttend = predicted_comp,
          PredAttend.Basic = predicted_simp)
 
-testPred <- all %>%
+testPredF <- all %>%
   select("recordID", "PredAttend", "PredAttend.Basic")
+
+```
+
+```{r}
+
+save(testPredF, file = "testPredF.RData") 
 
 ```
 
