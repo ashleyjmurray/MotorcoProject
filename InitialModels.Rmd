@@ -294,7 +294,7 @@ ValidSet <- mice_complete[-train,]
 ```
 
 ```{r create-random-forest}
-forest_model <- randomForest(Attend ~., data = TrainSet, importance = TRUE)
+forest_model <- randomForest(Attend ~. - Group - recordID, data = TrainSet, importance = TRUE)
 ```
 
 ```{r}
