@@ -217,24 +217,15 @@ notest <- dropped %>%
 
 ```{r missing-data}
 library(mice)
-mice_mod <- mice(notest, method='rf')
-mice_complete <- complete(mice_mod)
+mice_mod <- mice(dropped, method='rf')
+mice_full <- complete(mice_mod)
+mice_complete <- mice_full %>%
+  filter(Group != "Test")
 
 colSums(is.na(mice_complete))
 ```
 
 ```{r model-selection}
-
-#full_model_seated <- lm(Attend ~  month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + SPMostPlays.lt1000 + logIGFollowers + logSKFollowers + logBandsinTown + logBands60Mi + logYTSubscribers + Staff + JointEvent + Showtime + Day + Genre + Touring.Local + Returning.Act, data = seated)
-
-#full_model_standing <- lm(Attend ~ month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + SPMostPlays.lt1000 + logIGFollowers + logSKFollowers + logBandsinTown + logBands60Mi + logYTSubscribers + Staff + JointEvent + Showtime + Day + Genre + Touring.Local + Returning.Act, data = seated)
-
-#model_select_seat <- step(full_model_seat, direction = "backward")
-#model_select_stand <- step(full_model_stand, direction = "backward")
-
-#tidy(model_select_seat)
-#tidy(model_select_stand)
-
 full_model <- lm(Attend ~ . -Group, data=mice_complete)
 tidy(full_model)
 ```
@@ -253,6 +244,32 @@ model_int <- lm(Attend ~ (Capacity + FBFansNC.lt1000 + Touring.Local + Day + Ret
 tidy(model_int)
 anova(model_selected, model_int, test = "Chisq")
 ```
+
+```{r crossfold-validation}
+#library(rmse)
+#test <- mice_full %>%
+  #filter(Group == "CV1")
+#train <- mice_full %>%
+  #filter(Group != "CV1")
+#mod <- lm(Attend ~ Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen, data = train)
+#(rmse_test1 <- rmse(mod, test))
+
+set.seed(123)
+train.control <- trainControl(method = "repeatedcv", 
+                              number = 10, repeats = 10)
+# Train the model
+model <- train(Attend ~ Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen, data = mice_complete, method = "lm",
+               trControl = train.control)
+```
+
+```{r prediction}
+
+test <- mice_full %>%
+  filter(Group == "Test")
+
+predict(model_selected, test)
+```
+
 
 
 ## Random Forest
