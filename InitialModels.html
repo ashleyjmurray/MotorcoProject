@@ -367,12 +367,12 @@ summary {
 
 
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.0     ✓ purrr   0.3.3
 ## ✓ tibble  3.0.0     ✓ dplyr   0.8.5
 ## ✓ tidyr   1.0.2     ✓ stringr 1.4.0
 ## ✓ readr   1.3.1     ✓ forcats 0.5.0</code></pre>
-<pre><code>## ── Conflicts ───────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(ggplot2)
@@ -635,7 +635,7 @@ standing &lt;- full %&gt;%
   filter(Seated == &quot;No&quot;) %&gt;%
   filter(Group != &quot;Test&quot;)
 
-dropped &lt;-select(full,-c(&quot;Ref.x&quot;, &quot;day&quot;, &quot;Artist&quot;, &quot;TxPrice&quot;, &quot;FBAttend&quot;, &quot;FBInterest&quot;, &quot;FBInvites&quot;, &quot;FBFans50Mi&quot;, &quot;FBFansNC&quot;, &quot;SPMostPlays&quot;, &quot;recordID&quot;, &quot;new_year&quot;, &quot;Date&quot;, &quot;Reference..&quot;, &quot;Ref.y&quot;, &quot;Artists&quot;, &quot;Bands60Mi&quot;))
+dropped &lt;-select(full,-c(&quot;Ref.x&quot;, &quot;day&quot;, &quot;Artist&quot;, &quot;TxPrice&quot;, &quot;FBAttend&quot;, &quot;FBInterest&quot;, &quot;FBInvites&quot;, &quot;FBFans50Mi&quot;, &quot;FBFansNC&quot;, &quot;SPMostPlays&quot;, &quot;recordID&quot;, &quot;new_year&quot;, &quot;Date&quot;, &quot;Reference..&quot;, &quot;Ref.y&quot;, &quot;Artists&quot;, &quot;Bands60Mi&quot;, &quot;PSAvgTix&quot;, &quot;PSAvgGross&quot;, &quot;FBLikes&quot;, &quot;Twitter&quot;, &quot;SPFollowers&quot;, &quot;SPMonthListen&quot;, &quot;IGFollowers&quot;, &quot;SKFollowers&quot;, &quot;BandsinTown&quot;, &quot;YTSubscribers&quot;))
 
 notest &lt;- dropped %&gt;%
   filter(Group != &quot;Test&quot;)</code></pre>
@@ -648,55 +648,49 @@ notest &lt;- dropped %&gt;%
 <pre class="r"><code>mice_mod &lt;- mice(notest, method=&#39;rf&#39;)</code></pre>
 <pre><code>## 
 ##  iter imp variable
-##   1   1  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   1   2  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   1   3  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   1   4  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   1   5  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   2   1  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   2   2  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   2   3  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   2   4  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   2   5  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   3   1  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   3   2  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   3   3  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   3   4  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   3   5  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   4   1  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   4   2  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   4   3  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   4   4  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   4   5  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   5   1  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   5   2  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   5   3  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   5   4  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
-##   5   5  PSAvgTix  PSAvgGross  FBLikes  Twitter  SPFollowers  SPMonthListen  IGFollowers  SKFollowers  BandsinTown  YTSubscribers  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers</code></pre>
-<pre><code>## Warning: Number of logged events: 526</code></pre>
+##   1   1  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   1   2  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   1   3  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   1   4  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   1   5  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   2   1  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   2   2  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   2   3  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   2   4  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   2   5  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   3   1  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   3   2  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   3   3  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   3   4  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   3   5  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   4   1  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   4   2  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   4   3  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   4   4  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   4   5  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   5   1  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   5   2  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   5   3  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   5   4  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers
+##   5   5  Returning.Act  logPSAvgTix  logPSAvgGross  logFBLikes  logTwitter  logSPFollowers  logSPMonthListen  logIGFollowers  logSKFollowers  logBandsinTown  logYTSubscribers</code></pre>
+<pre><code>## Warning: Number of logged events: 276</code></pre>
 <pre class="r"><code>mice_complete &lt;- complete(mice_mod)
 
 colSums(is.na(mice_complete))</code></pre>
 <pre><code>##              month               year             Attend          SpecialTx 
 ##                  0                  0                  0                  0 
-##           PSAvgTix         PSAvgGross            FBLikes            Twitter 
+##             Seated           Capacity              Staff         JointEvent 
 ##                  0                  0                  0                  0 
-##        SPFollowers      SPMonthListen        IGFollowers        SKFollowers 
+##              Group  FBFans50Mi.lt1000    FBFansNC.lt1000 SPMostPlays.lt1000 
 ##                  0                  0                  0                  0 
-##        BandsinTown      YTSubscribers             Seated           Capacity 
+##      Touring.Local                Day           Showtime              Genre 
 ##                  0                  0                  0                  0 
-##              Staff         JointEvent              Group  FBFans50Mi.lt1000 
+##      Returning.Act        logPSAvgTix      logPSAvgGross         logFBLikes 
 ##                  0                  0                  0                  0 
-##    FBFansNC.lt1000 SPMostPlays.lt1000      Touring.Local                Day 
+##         logTwitter     logSPFollowers   logSPMonthListen     logIGFollowers 
 ##                  0                  0                  0                  0 
-##           Showtime              Genre      Returning.Act        logPSAvgTix 
-##                  0                  0                  0                  0 
-##      logPSAvgGross         logFBLikes         logTwitter     logSPFollowers 
-##                  0                  0                  0                  0 
-##   logSPMonthListen     logIGFollowers     logSKFollowers     logBandsinTown 
-##                  0                  0                  0                  0 
-##   logYTSubscribers 
-##                  0</code></pre>
+##     logSKFollowers     logBandsinTown   logYTSubscribers 
+##                  0                  0                  0</code></pre>
 <pre class="r"><code>#full_model_seated &lt;- lm(Attend ~  month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + SPMostPlays.lt1000 + logIGFollowers + logSKFollowers + logBandsinTown + logBands60Mi + logYTSubscribers + Staff + JointEvent + Showtime + Day + Genre + Touring.Local + Returning.Act, data = seated)
 
 #full_model_standing &lt;- lm(Attend ~ month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + SPMostPlays.lt1000 + logIGFollowers + logSKFollowers + logBandsinTown + logBands60Mi + logYTSubscribers + Staff + JointEvent + Showtime + Day + Genre + Touring.Local + Returning.Act, data = seated)
@@ -707,40 +701,523 @@ colSums(is.na(mice_complete))</code></pre>
 #tidy(model_select_seat)
 #tidy(model_select_stand)
 
-full_model &lt;- lm(Attend ~ . , data=mice_complete)
+full_model &lt;- lm(Attend ~ . -Group, data=mice_complete)
 tidy(full_model)</code></pre>
-<pre><code>## # A tibble: 91 x 5
+<pre><code>## # A tibble: 72 x 5
 ##    term        estimate std.error statistic p.value
 ##    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-##  1 (Intercept)   514.       955.      0.538  0.591 
-##  2 month10       -30.5       33.8    -0.902  0.368 
-##  3 month11        10.1       34.6     0.291  0.772 
-##  4 month12       -35.3       38.3    -0.922  0.358 
-##  5 month2        -41.8       31.3    -1.34   0.182 
-##  6 month3         -3.87      34.9    -0.111  0.912 
-##  7 month4        -62.0       35.0    -1.77   0.0775
-##  8 month5        -28.8       34.5    -0.833  0.405 
-##  9 month6        -20.6       35.4    -0.582  0.561 
-## 10 month7        -28.5       37.4    -0.761  0.448 
-## # … with 81 more rows</code></pre>
-<pre class="r"><code>#full_model_seated &lt;- lm(Attend ~ month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + logIGFollowers + logSKFollowers + logBandsinTown+ logBands60Mi + Staff + JointEvent + Showtime + Day + Genre + Returning.Act, data = seated)</code></pre>
-<pre class="r"><code>#standing$logBands60Mi[which(is.nan(standing$logBands60Mi))] = NA
-#standing$logBands60Mi[which(standing$logBands60Mi==Inf)] = NA
-#standing$logBands60Mi[which(standing$logBands60Mi==-Inf)] = NA
-#standing$logTwitter[which(is.nan(standing$logTwitter))] = NA
-#standing$logTwitter[which(standing$logTwitter==Inf)] = NA
-#standing$logTwitter[which(standing$logTwitter==-Inf)] = NA
-
-#standing$logPSAvgTix[which(is.nan(standing$logPSAvgTix))] = NA
-#standing$logBands60Mi[which(standing$logBands60Mi==Inf)] = NA
-#standing$logBands60Mi[which(standing$logBands60Mi==-Inf)] = NA</code></pre>
-<pre class="r"><code>#full_model_standing &lt;- lm(Attend ~ month + year + SpecialTx + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + logIGFollowers + logSKFollowers + logBandsinTown + logBands60Mi + Staff + JointEvent + Showtime + Day + Genre + Returning.Act, data = standing)</code></pre>
-<pre class="r"><code>#model_select_seated &lt;- step(full_model_seated, direction = &quot;backward&quot;)
-#model_select_standing &lt;- step(full_model_standing, direction = &quot;backward&quot;)
-#tidy(model_select_seated)
-#tidy(model_select_standing)</code></pre>
+##  1 (Intercept)   -72.1      907.    -0.0795   0.937
+##  2 month10       -29.4       33.1   -0.890    0.374
+##  3 month11        10.0       33.6    0.299    0.765
+##  4 month12       -20.1       37.4   -0.538    0.591
+##  5 month2        -43.8       30.9   -1.42     0.158
+##  6 month3          9.96      34.1    0.292    0.770
+##  7 month4        -54.8       34.5   -1.59     0.114
+##  8 month5        -18.3       33.7   -0.543    0.587
+##  9 month6        -10.4       34.0   -0.305    0.761
+## 10 month7        -13.8       36.0   -0.382    0.702
+## # … with 62 more rows</code></pre>
+<pre class="r"><code>model_selected &lt;- step(full_model, direction = &quot;backward&quot;)</code></pre>
+<pre><code>## Start:  AIC=3498.33
+## Attend ~ (month + year + SpecialTx + Seated + Capacity + Staff + 
+##     JointEvent + Group + FBFans50Mi.lt1000 + FBFansNC.lt1000 + 
+##     SPMostPlays.lt1000 + Touring.Local + Day + Showtime + Genre + 
+##     Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + 
+##     logTwitter + logSPFollowers + logSPMonthListen + logIGFollowers + 
+##     logSKFollowers + logBandsinTown + logYTSubscribers) - Group
+## 
+##                      Df Sum of Sq     RSS    AIC
+## - Showtime           13     88079 2845105 3484.2
+## - Genre              16    199864 2956890 3492.7
+## - year                5     36743 2793769 3493.3
+## - month              11    135785 2892811 3494.5
+## - Capacity            1       236 2757262 3496.4
+## - Seated              1       710 2757736 3496.4
+## - logBandsinTown      1       713 2757739 3496.4
+## - FBFans50Mi.lt1000   1      1860 2758886 3496.6
+## - SpecialTx           1      1864 2758890 3496.6
+## - Staff               1      1885 2758911 3496.6
+## - logSKFollowers      1      3007 2760033 3496.7
+## - JointEvent          1      4192 2761219 3496.9
+## - Day                 6     78421 2835447 3496.9
+## - logIGFollowers      1      4425 2761451 3496.9
+## - logSPMonthListen    1      9598 2766624 3497.6
+## - SPMostPlays.lt1000  1     11256 2768282 3497.9
+## - logFBLikes          1     11444 2768471 3497.9
+## &lt;none&gt;                            2757026 3498.3
+## - FBFansNC.lt1000     1     22469 2779495 3499.4
+## - logPSAvgTix         1     22621 2779647 3499.4
+## - logTwitter          1     31901 2788927 3500.7
+## - logYTSubscribers    1     32186 2789212 3500.7
+## - logPSAvgGross       1     35514 2792540 3501.2
+## - Returning.Act       1     48933 2805959 3503.0
+## - Touring.Local       1     77063 2834089 3506.7
+## - logSPFollowers      1    110522 2867548 3511.1
+## 
+## Step:  AIC=3484.18
+## Attend ~ month + year + SpecialTx + Seated + Capacity + Staff + 
+##     JointEvent + FBFans50Mi.lt1000 + FBFansNC.lt1000 + SPMostPlays.lt1000 + 
+##     Touring.Local + Day + Genre + Returning.Act + logPSAvgTix + 
+##     logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + 
+##     logSPMonthListen + logIGFollowers + logSKFollowers + logBandsinTown + 
+##     logYTSubscribers
+## 
+##                      Df Sum of Sq     RSS    AIC
+## - Genre              16    193292 3038397 3477.0
+## - year                5     31140 2876245 3478.3
+## - month              11    133089 2978194 3479.4
+## - logBandsinTown      1       583 2845688 3482.3
+## - Staff               1       700 2845805 3482.3
+## - Capacity            1       877 2845982 3482.3
+## - FBFans50Mi.lt1000   1      1014 2846119 3482.3
+## - Seated              1      1676 2846781 3482.4
+## - SpecialTx           1      2721 2847826 3482.5
+## - logIGFollowers      1      3339 2848444 3482.6
+## - logSKFollowers      1      3921 2849026 3482.7
+## - JointEvent          1      5551 2850656 3482.9
+## - logSPMonthListen    1      8785 2853890 3483.3
+## - SPMostPlays.lt1000  1     10468 2855573 3483.6
+## - logFBLikes          1     14999 2860105 3484.2
+## &lt;none&gt;                            2845105 3484.2
+## - logPSAvgTix         1     21750 2866855 3485.1
+## - FBFansNC.lt1000     1     22995 2868100 3485.2
+## - Day                 6    107953 2953058 3486.2
+## - logTwitter          1     36746 2881851 3487.0
+## - logYTSubscribers    1     38715 2883820 3487.3
+## - logPSAvgGross       1     45858 2890963 3488.2
+## - Returning.Act       1     58918 2904024 3489.9
+## - Touring.Local       1     88338 2933443 3493.7
+## - logSPFollowers      1    112383 2957488 3496.8
+## 
+## Step:  AIC=3476.96
+## Attend ~ month + year + SpecialTx + Seated + Capacity + Staff + 
+##     JointEvent + FBFans50Mi.lt1000 + FBFansNC.lt1000 + SPMostPlays.lt1000 + 
+##     Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + 
+##     logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + 
+##     logIGFollowers + logSKFollowers + logBandsinTown + logYTSubscribers
+## 
+##                      Df Sum of Sq     RSS    AIC
+## - year                5     44547 3082945 3472.4
+## - month              11    156414 3194811 3473.9
+## - Capacity            1       611 3039009 3475.0
+## - Seated              1      1388 3039785 3475.1
+## - logSKFollowers      1      1428 3039825 3475.1
+## - logBandsinTown      1      2120 3040517 3475.2
+## - JointEvent          1      3160 3041557 3475.4
+## - SpecialTx           1      3452 3041849 3475.4
+## - SPMostPlays.lt1000  1      3958 3042356 3475.5
+## - FBFans50Mi.lt1000   1      5719 3044116 3475.7
+## - logIGFollowers      1      6763 3045160 3475.8
+## - Staff               1      8749 3047146 3476.0
+## &lt;none&gt;                            3038397 3477.0
+## - FBFansNC.lt1000     1     19439 3057836 3477.4
+## - logSPMonthListen    1     22569 3060966 3477.8
+## - logFBLikes          1     22900 3061297 3477.8
+## - logPSAvgTix         1     31563 3069961 3478.9
+## - Day                 6    118165 3156563 3479.3
+## - logTwitter          1     39366 3077764 3479.8
+## - logPSAvgGross       1     50748 3089145 3481.2
+## - Returning.Act       1     51632 3090030 3481.3
+## - logYTSubscribers    1     54521 3092918 3481.7
+## - Touring.Local       1     77262 3115659 3484.4
+## - logSPFollowers      1    129312 3167710 3490.7
+## 
+## Step:  AIC=3472.45
+## Attend ~ month + SpecialTx + Seated + Capacity + Staff + JointEvent + 
+##     FBFans50Mi.lt1000 + FBFansNC.lt1000 + SPMostPlays.lt1000 + 
+##     Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + 
+##     logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + 
+##     logIGFollowers + logSKFollowers + logBandsinTown + logYTSubscribers
+## 
+##                      Df Sum of Sq     RSS    AIC
+## - month              11    160326 3243270 3469.6
+## - logSKFollowers      1       601 3083545 3470.5
+## - logBandsinTown      1      1043 3083988 3470.6
+## - Seated              1      2010 3084955 3470.7
+## - FBFans50Mi.lt1000   1      2112 3085057 3470.7
+## - JointEvent          1      2169 3085114 3470.7
+## - SpecialTx           1      2234 3085179 3470.7
+## - SPMostPlays.lt1000  1      2825 3085770 3470.8
+## - Capacity            1      4603 3087547 3471.0
+## - Staff               1      7185 3090130 3471.3
+## - logIGFollowers      1      8312 3091257 3471.5
+## &lt;none&gt;                            3082945 3472.4
+## - logSPMonthListen    1     26513 3109458 3473.7
+## - logFBLikes          1     27620 3110565 3473.8
+## - FBFansNC.lt1000     1     29110 3112055 3474.0
+## - logPSAvgTix         1     31032 3113977 3474.2
+## - Returning.Act       1     44864 3127809 3475.9
+## - logTwitter          1     46618 3129562 3476.1
+## - logYTSubscribers    1     47036 3129981 3476.2
+## - Day                 6    131606 3214551 3476.2
+## - logPSAvgGross       1     57411 3140356 3477.4
+## - Touring.Local       1     78359 3161304 3479.9
+## - logSPFollowers      1    132847 3215792 3486.4
+## 
+## Step:  AIC=3469.56
+## Attend ~ SpecialTx + Seated + Capacity + Staff + JointEvent + 
+##     FBFans50Mi.lt1000 + FBFansNC.lt1000 + SPMostPlays.lt1000 + 
+##     Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + 
+##     logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + 
+##     logIGFollowers + logSKFollowers + logBandsinTown + logYTSubscribers
+## 
+##                      Df Sum of Sq     RSS    AIC
+## - logBandsinTown      1         8 3243279 3467.6
+## - logSKFollowers      1       185 3243455 3467.6
+## - JointEvent          1       832 3244102 3467.7
+## - Seated              1      1978 3245249 3467.8
+## - FBFans50Mi.lt1000   1      2074 3245345 3467.8
+## - SpecialTx           1      3137 3246407 3467.9
+## - Capacity            1      4173 3247443 3468.0
+## - Staff               1      5027 3248297 3468.1
+## - logIGFollowers      1      5291 3248561 3468.2
+## - SPMostPlays.lt1000  1      6194 3249464 3468.3
+## &lt;none&gt;                            3243270 3469.6
+## - logSPMonthListen    1     19196 3262466 3469.8
+## - logFBLikes          1     25484 3268755 3470.5
+## - FBFansNC.lt1000     1     31783 3275054 3471.2
+## - Returning.Act       1     40699 3283970 3472.3
+## - logPSAvgTix         1     41442 3284712 3472.3
+## - logTwitter          1     49829 3293099 3473.3
+## - logPSAvgGross       1     52730 3296000 3473.6
+## - logYTSubscribers    1     58775 3302046 3474.3
+## - Day                 6    153986 3397256 3475.1
+## - Touring.Local       1     87106 3330377 3477.6
+## - logSPFollowers      1    113445 3356715 3480.5
+## 
+## Step:  AIC=3467.56
+## Attend ~ SpecialTx + Seated + Capacity + Staff + JointEvent + 
+##     FBFans50Mi.lt1000 + FBFansNC.lt1000 + SPMostPlays.lt1000 + 
+##     Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + 
+##     logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + 
+##     logIGFollowers + logSKFollowers + logYTSubscribers
+## 
+##                      Df Sum of Sq     RSS    AIC
+## - logSKFollowers      1       180 3243459 3465.6
+## - JointEvent          1       833 3244112 3465.7
+## - Seated              1      1991 3245270 3465.8
+## - FBFans50Mi.lt1000   1      2117 3245396 3465.8
+## - SpecialTx           1      3173 3246451 3465.9
+## - Capacity            1      4197 3247476 3466.1
+## - Staff               1      5052 3248331 3466.2
+## - logIGFollowers      1      5288 3248567 3466.2
+## - SPMostPlays.lt1000  1      6238 3249517 3466.3
+## &lt;none&gt;                            3243279 3467.6
+## - logSPMonthListen    1     19263 3262542 3467.8
+## - logFBLikes          1     26983 3270262 3468.7
+## - FBFansNC.lt1000     1     31776 3275054 3469.2
+## - Returning.Act       1     40758 3284037 3470.3
+## - logPSAvgTix         1     41436 3284715 3470.3
+## - logTwitter          1     49831 3293110 3471.3
+## - logPSAvgGross       1     52779 3296058 3471.6
+## - logYTSubscribers    1     59305 3302583 3472.4
+## - Day                 6    154020 3397298 3473.1
+## - Touring.Local       1     87128 3330407 3475.6
+## - logSPFollowers      1    113938 3357217 3478.6
+## 
+## Step:  AIC=3465.58
+## Attend ~ SpecialTx + Seated + Capacity + Staff + JointEvent + 
+##     FBFans50Mi.lt1000 + FBFansNC.lt1000 + SPMostPlays.lt1000 + 
+##     Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + 
+##     logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + 
+##     logIGFollowers + logYTSubscribers
+## 
+##                      Df Sum of Sq     RSS    AIC
+## - JointEvent          1       814 3244273 3463.7
+## - FBFans50Mi.lt1000   1      2032 3245491 3463.8
+## - Seated              1      2068 3245527 3463.8
+## - SpecialTx           1      3200 3246659 3464.0
+## - Capacity            1      4290 3247749 3464.1
+## - Staff               1      5101 3248560 3464.2
+## - logIGFollowers      1      5170 3248629 3464.2
+## - SPMostPlays.lt1000  1      6115 3249574 3464.3
+## &lt;none&gt;                            3243459 3465.6
+## - logSPMonthListen    1     19328 3262787 3465.8
+## - logFBLikes          1     26958 3270417 3466.7
+## - FBFansNC.lt1000     1     31954 3275413 3467.3
+## - Returning.Act       1     40796 3284255 3468.3
+## - logPSAvgTix         1     41294 3284753 3468.4
+## - logPSAvgGross       1     54148 3297607 3469.8
+## - logTwitter          1     58087 3301546 3470.3
+## - logYTSubscribers    1     59580 3303039 3470.4
+## - Day                 6    156116 3399575 3471.3
+## - Touring.Local       1     87257 3330716 3473.6
+## - logSPFollowers      1    170789 3414248 3482.9
+## 
+## Step:  AIC=3463.68
+## Attend ~ SpecialTx + Seated + Capacity + Staff + FBFans50Mi.lt1000 + 
+##     FBFansNC.lt1000 + SPMostPlays.lt1000 + Touring.Local + Day + 
+##     Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + 
+##     logTwitter + logSPFollowers + logSPMonthListen + logIGFollowers + 
+##     logYTSubscribers
+## 
+##                      Df Sum of Sq     RSS    AIC
+## - FBFans50Mi.lt1000   1      1819 3246092 3461.9
+## - Seated              1      1932 3246205 3461.9
+## - SpecialTx           1      3263 3247536 3462.1
+## - Capacity            1      4093 3248366 3462.2
+## - Staff               1      4997 3249269 3462.3
+## - logIGFollowers      1      5122 3249395 3462.3
+## - SPMostPlays.lt1000  1      6045 3250318 3462.4
+## &lt;none&gt;                            3244273 3463.7
+## - logSPMonthListen    1     20267 3264540 3464.0
+## - logFBLikes          1     27971 3272244 3464.9
+## - FBFansNC.lt1000     1     32915 3277188 3465.5
+## - Returning.Act       1     40872 3285144 3466.4
+## - logPSAvgTix         1     42229 3286502 3466.6
+## - logPSAvgGross       1     54352 3298625 3467.9
+## - logTwitter          1     57416 3301689 3468.3
+## - logYTSubscribers    1     62653 3306926 3468.9
+## - Day                 6    158522 3402795 3469.7
+## - Touring.Local       1     87680 3331952 3471.7
+## - logSPFollowers      1    172841 3417114 3481.2
+## 
+## Step:  AIC=3461.89
+## Attend ~ SpecialTx + Seated + Capacity + Staff + FBFansNC.lt1000 + 
+##     SPMostPlays.lt1000 + Touring.Local + Day + Returning.Act + 
+##     logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + 
+##     logSPMonthListen + logIGFollowers + logYTSubscribers
+## 
+##                      Df Sum of Sq     RSS    AIC
+## - Seated              1      1115 3247207 3460.0
+## - SpecialTx           1      2575 3248667 3460.2
+## - Capacity            1      2943 3249034 3460.2
+## - Staff               1      4013 3250105 3460.4
+## - logIGFollowers      1      5833 3251924 3460.6
+## - SPMostPlays.lt1000  1      5985 3252077 3460.6
+## &lt;none&gt;                            3246092 3461.9
+## - logSPMonthListen    1     20212 3266304 3462.2
+## - logFBLikes          1     29490 3275582 3463.3
+## - Returning.Act       1     39988 3286080 3464.5
+## - logPSAvgTix         1     41952 3288044 3464.7
+## - logPSAvgGross       1     53908 3300000 3466.1
+## - logTwitter          1     57808 3303900 3466.5
+## - logYTSubscribers    1     61267 3307359 3466.9
+## - Day                 6    158461 3404553 3467.9
+## - Touring.Local       1     86071 3332162 3469.8
+## - FBFansNC.lt1000     1     95896 3341988 3470.9
+## - logSPFollowers      1    172246 3418338 3479.4
+## 
+## Step:  AIC=3460.02
+## Attend ~ SpecialTx + Capacity + Staff + FBFansNC.lt1000 + SPMostPlays.lt1000 + 
+##     Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + 
+##     logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + 
+##     logIGFollowers + logYTSubscribers
+## 
+##                      Df Sum of Sq     RSS    AIC
+## - SpecialTx           1      2703 3249910 3458.3
+## - Staff               1      3635 3250842 3458.4
+## - SPMostPlays.lt1000  1      5897 3253104 3458.7
+## - logIGFollowers      1      6316 3253522 3458.8
+## &lt;none&gt;                            3247207 3460.0
+## - logSPMonthListen    1     19807 3267014 3460.3
+## - logFBLikes          1     28862 3276069 3461.4
+## - Returning.Act       1     39495 3286701 3462.6
+## - logPSAvgTix         1     41700 3288906 3462.8
+## - Capacity            1     45623 3292830 3463.3
+## - logPSAvgGross       1     53852 3301059 3464.2
+## - logTwitter          1     57071 3304278 3464.6
+## - logYTSubscribers    1     61790 3308997 3465.1
+## - Day                 6    160130 3407337 3466.2
+## - Touring.Local       1     86187 3333394 3467.9
+## - FBFansNC.lt1000     1     96959 3344166 3469.1
+## - logSPFollowers      1    171132 3418338 3477.4
+## 
+## Step:  AIC=3458.33
+## Attend ~ Capacity + Staff + FBFansNC.lt1000 + SPMostPlays.lt1000 + 
+##     Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + 
+##     logFBLikes + logTwitter + logSPFollowers + logSPMonthListen + 
+##     logIGFollowers + logYTSubscribers
+## 
+##                      Df Sum of Sq     RSS    AIC
+## - Staff               1      2587 3252496 3456.6
+## - SPMostPlays.lt1000  1      5509 3255418 3457.0
+## - logIGFollowers      1      7267 3257177 3457.2
+## &lt;none&gt;                            3249910 3458.3
+## - logSPMonthListen    1     20713 3270623 3458.7
+## - logFBLikes          1     29692 3279602 3459.8
+## - logPSAvgTix         1     40142 3290052 3461.0
+## - Returning.Act       1     41733 3291642 3461.1
+## - Capacity            1     48063 3297973 3461.9
+## - logTwitter          1     58079 3307988 3463.0
+## - logPSAvgGross       1     59485 3309395 3463.2
+## - logYTSubscribers    1     63580 3313490 3463.6
+## - Day                 6    158624 3408534 3464.3
+## - Touring.Local       1     84953 3334863 3466.1
+## - FBFansNC.lt1000     1     97039 3346949 3467.4
+## - logSPFollowers      1    170538 3420448 3475.6
+## 
+## Step:  AIC=3456.63
+## Attend ~ Capacity + FBFansNC.lt1000 + SPMostPlays.lt1000 + Touring.Local + 
+##     Day + Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + 
+##     logTwitter + logSPFollowers + logSPMonthListen + logIGFollowers + 
+##     logYTSubscribers
+## 
+##                      Df Sum of Sq     RSS    AIC
+## - SPMostPlays.lt1000  1      5192 3257689 3455.2
+## - logIGFollowers      1      6462 3258958 3455.4
+## &lt;none&gt;                            3252496 3456.6
+## - logSPMonthListen    1     18414 3270911 3456.8
+## - logFBLikes          1     27106 3279602 3457.8
+## - logPSAvgTix         1     39779 3292276 3459.2
+## - Returning.Act       1     42715 3295211 3459.6
+## - Capacity            1     45483 3297979 3459.9
+## - logPSAvgGross       1     59266 3311762 3461.4
+## - logTwitter          1     60520 3313017 3461.6
+## - logYTSubscribers    1     61156 3313653 3461.7
+## - Day                 6    156699 3409195 3462.4
+## - Touring.Local       1     84281 3336777 3464.3
+## - FBFansNC.lt1000     1    107011 3359508 3466.8
+## - logSPFollowers      1    176714 3429210 3474.6
+## 
+## Step:  AIC=3455.23
+## Attend ~ Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + 
+##     logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + 
+##     logSPMonthListen + logIGFollowers + logYTSubscribers
+## 
+##                    Df Sum of Sq     RSS    AIC
+## - logIGFollowers    1      6496 3264185 3454.0
+## &lt;none&gt;                          3257689 3455.2
+## - logSPMonthListen  1     22666 3280355 3455.8
+## - logFBLikes        1     27680 3285369 3456.4
+## - logPSAvgTix       1     40603 3298292 3457.9
+## - Returning.Act     1     42881 3300570 3458.2
+## - Capacity          1     47440 3305129 3458.7
+## - logPSAvgGross     1     60517 3318205 3460.2
+## - logYTSubscribers  1     63704 3321393 3460.5
+## - logTwitter        1     66326 3324014 3460.8
+## - Day               6    161375 3419063 3461.5
+## - Touring.Local     1     84174 3341862 3462.9
+## - FBFansNC.lt1000   1    108074 3365763 3465.5
+## - logSPFollowers    1    172445 3430134 3472.7
+## 
+## Step:  AIC=3453.99
+## Attend ~ Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + 
+##     logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + 
+##     logSPMonthListen + logYTSubscribers
+## 
+##                    Df Sum of Sq     RSS    AIC
+## &lt;none&gt;                          3264185 3454.0
+## - logSPMonthListen  1     20035 3284220 3454.3
+## - logFBLikes        1     26073 3290258 3455.0
+## - logPSAvgTix       1     39151 3303336 3456.5
+## - Returning.Act     1     40080 3304265 3456.6
+## - Capacity          1     48809 3312994 3457.6
+## - logPSAvgGross     1     62740 3326925 3459.2
+## - Day               6    162886 3427071 3460.3
+## - logYTSubscribers  1     75607 3339792 3460.6
+## - Touring.Local     1     83302 3347487 3461.5
+## - logTwitter        1     94990 3359175 3462.8
+## - FBFansNC.lt1000   1    109993 3374178 3464.5
+## - logSPFollowers    1    173565 3437750 3471.5</code></pre>
+<pre class="r"><code>tidy(model_selected)</code></pre>
+<pre><code>## # A tibble: 18 x 5
+##    term                     estimate std.error statistic  p.value
+##    &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1 (Intercept)              -537.      65.5      -8.19   4.54e-15
+##  2 Capacity                    0.224    0.0966    2.32   2.11e- 2
+##  3 FBFansNC.lt10001          -59.6     17.1      -3.48   5.67e- 4
+##  4 Touring.LocalTouring Act  -72.9     24.1      -3.03   2.65e- 3
+##  5 DayMon                      0.646   25.1       0.0258 9.79e- 1
+##  6 DaySat                      5.55    17.0       0.327  7.44e- 1
+##  7 DaySun                    -34.9     16.1      -2.17   3.06e- 2
+##  8 DayThu                    -48.1     15.7      -3.07   2.31e- 3
+##  9 DayTue                    -42.4     18.5      -2.29   2.24e- 2
+## 10 DayWed                    -30.5     17.7      -1.73   8.49e- 2
+## 11 Returning.Act1             26.0     12.4       2.10   3.65e- 2
+## 12 logPSAvgTix                32.1     15.5       2.08   3.87e- 2
+## 13 logPSAvgGross              29.6     11.3       2.63   8.99e- 3
+## 14 logFBLikes                 -9.75     5.76     -1.69   9.12e- 2
+## 15 logTwitter                 15.1      4.67      3.23   1.34e- 3
+## 16 logSPFollowers             31.3      7.17      4.37   1.64e- 5
+## 17 logSPMonthListen           -7.86     5.29     -1.48   1.39e- 1
+## 18 logYTSubscribers            7.13     2.47      2.88   4.17e- 3</code></pre>
+<pre class="r"><code>library(rms)</code></pre>
+<pre><code>## Loading required package: Hmisc</code></pre>
+<pre><code>## Loading required package: survival</code></pre>
+<pre><code>## 
+## Attaching package: &#39;survival&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:caret&#39;:
+## 
+##     cluster</code></pre>
+<pre><code>## Loading required package: Formula</code></pre>
+<pre><code>## 
+## Attaching package: &#39;Hmisc&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     src, summarize</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     format.pval, units</code></pre>
+<pre><code>## Loading required package: SparseM</code></pre>
+<pre><code>## 
+## Attaching package: &#39;SparseM&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     backsolve</code></pre>
+<pre class="r"><code>tidy(vif(model_selected))</code></pre>
+<pre><code>## Warning: &#39;tidy.numeric&#39; is deprecated.
+## See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>## Warning: `data_frame()` is deprecated as of tibble 1.1.0.
+## Please use `tibble()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<pre><code>## # A tibble: 17 x 2
+##    names                        x
+##    &lt;chr&gt;                    &lt;dbl&gt;
+##  1 Capacity                  1.06
+##  2 FBFansNC.lt10001          1.10
+##  3 Touring.LocalTouring Act  1.09
+##  4 DayMon                    1.25
+##  5 DaySat                    1.42
+##  6 DaySun                    1.49
+##  7 DayThu                    1.51
+##  8 DayTue                    1.40
+##  9 DayWed                    1.41
+## 10 Returning.Act1            1.05
+## 11 logPSAvgTix               4.68
+## 12 logPSAvgGross             4.30
+## 13 logFBLikes                2.95
+## 14 logTwitter                2.26
+## 15 logSPFollowers            7.64
+## 16 logSPMonthListen          5.30
+## 17 logYTSubscribers          1.58</code></pre>
+<pre class="r"><code>model_int &lt;- lm(Attend ~ (Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen)*Capacity, data = mice_complete)
+tidy(model_int)</code></pre>
+<pre><code>## # A tibble: 32 x 5
+##    term                     estimate std.error statistic p.value
+##    &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1 (Intercept)              -389.       783.     -0.497    0.619
+##  2 Capacity                   -0.177      1.80   -0.0981   0.922
+##  3 FBFansNC.lt10001         -229.       260.     -0.878    0.381
+##  4 Touring.LocalTouring Act -351.       365.     -0.960    0.338
+##  5 DayMon                   -158.      1008.     -0.157    0.876
+##  6 DaySat                   -178.       174.     -1.02     0.307
+##  7 DaySun                    -80.6      146.     -0.551    0.582
+##  8 DayThu                    -24.8      151.     -0.164    0.870
+##  9 DayTue                     72.0      186.      0.388    0.698
+## 10 DayWed                    284.       181.      1.57     0.117
+## # … with 22 more rows</code></pre>
+<pre class="r"><code>anova(model_selected, model_int, test = &quot;Chisq&quot;)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: Attend ~ Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + 
+##     logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + 
+##     logSPMonthListen + logYTSubscribers
+## Model 2: Attend ~ (Capacity + FBFansNC.lt1000 + Touring.Local + Day + 
+##     Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + 
+##     logTwitter + logSPFollowers + logSPMonthListen) * Capacity
+##   Res.Df     RSS Df Sum of Sq Pr(&gt;Chi)
+## 1    359 3264185                      
+## 2    345 3231260 14     32925   0.9977</code></pre>
 <div id="random-forest" class="section level2">
 <h2>Random Forest</h2>
+<pre class="r"><code>#need to convert all to numeric types for random forest
+for(i in 1:ncol(mice_complete)){
+  if(typeof(mice_complete[[i]]) == &#39;character&#39;){
+    mice_complete[[i]] &lt;- as.factor(mice_complete[[i]])
+  }
+}</code></pre>
 <pre class="r"><code>library(randomForest)</code></pre>
 <pre><code>## randomForest 4.6-14</code></pre>
 <pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
@@ -752,158 +1229,13 @@ tidy(full_model)</code></pre>
 <pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
 ## 
 ##     margin</code></pre>
-<pre class="r"><code>#split into Train and Validation sets
-set.seed(100)
-train &lt;- sample(nrow(notest), 0.7*nrow(notest), replace = FALSE)
-TrainSet &lt;- notest[train,]
-ValidSet &lt;- notest[-train,]
-summary(TrainSet)</code></pre>
-<pre><code>##      month       year        Attend      SpecialTx    PSAvgTix     
-##  10     : 34   2015: 6   Min.   :  4.0   No :201   Min.   :  28.0  
-##  5      : 28   2016:46   1st Qu.: 74.5   Yes: 62   1st Qu.: 164.8  
-##  11     : 26   2017:69   Median :147.0             Median : 262.0  
-##  3      : 25   2018:76   Mean   :187.4             Mean   : 329.3  
-##  9      : 25   2019:54   3rd Qu.:269.5             3rd Qu.: 431.8  
-##  6      : 23   2020:12   Max.   :452.0             Max.   :2300.0  
-##  (Other):102                                       NA&#39;s   :71      
-##    PSAvgGross        FBLikes           Twitter        SPFollowers     
-##  Min.   :   214   Min.   :    154   Min.   :   212   Min.   :     26  
-##  1st Qu.:  2600   1st Qu.:  11700   1st Qu.:  2796   1st Qu.:   2888  
-##  Median :  4950   Median :  29000   Median :  7634   Median :  14034  
-##  Mean   :  8007   Mean   :  65863   Mean   : 19952   Mean   :  39429  
-##  3rd Qu.:  8825   3rd Qu.:  67783   3rd Qu.: 20200   3rd Qu.:  46479  
-##  Max.   :198000   Max.   :1115022   Max.   :326300   Max.   :1323518  
-##  NA&#39;s   :71       NA&#39;s   :22        NA&#39;s   :46       NA&#39;s   :43       
-##  SPMonthListen      IGFollowers       SKFollowers      BandsinTown    
-##  Min.   :     16   Min.   :     23   Min.   :    13   Min.   :    34  
-##  1st Qu.:  16730   1st Qu.:   4019   1st Qu.:  1543   1st Qu.:  4800  
-##  Median :  66340   Median :   9378   Median :  9704   Median : 16500  
-##  Mean   : 199290   Mean   :  29458   Mean   : 22248   Mean   : 36475  
-##  3rd Qu.: 226000   3rd Qu.:  23225   3rd Qu.: 31248   3rd Qu.: 46600  
-##  Max.   :3938863   Max.   :1000000   Max.   :302700   Max.   :436600  
-##  NA&#39;s   :45        NA&#39;s   :49        NA&#39;s   :38       NA&#39;s   :38      
-##  YTSubscribers      Seated       Capacity         Staff       JointEvent 
-##  Min.   :     2.0   No :239   Min.   :250.0   Min.   :1.000   FALSE:246  
-##  1st Qu.:   247.2   Yes: 24   1st Qu.:430.0   1st Qu.:1.000   TRUE : 17  
-##  Median :  1148.0             Median :450.0   Median :2.000              
-##  Mean   : 16085.8             Mean   :423.6   Mean   :1.768              
-##  3rd Qu.:  5453.2             3rd Qu.:450.0   3rd Qu.:2.500              
-##  Max.   :688229.0             Max.   :450.0   Max.   :3.000              
-##  NA&#39;s   :73                                                              
-##     Group           FBFans50Mi.lt1000 FBFansNC.lt1000 SPMostPlays.lt1000
-##  Length:263         0:221             0:233           0:259             
-##  Class :character   1: 42             1: 30           1:  4             
-##  Mode  :character                                                       
-##                                                                         
-##                                                                         
-##                                                                         
-##                                                                         
-##      Touring.Local  Day           Showtime          Genre    Returning.Act
-##             :  0   Fri:60   8:00:00 PM:143   Americana :49   0   :210     
-##  Local      : 15   Mon:13   9:00:00 PM: 82   Indie     :47   1   : 52     
-##  Touring Act:248   Sat:42   7:30:00 PM: 16   Roots/Rock:43   NA&#39;s:  1     
-##                    Sun:39   7:00:00 PM:  7   Electronic:20                
-##                    Thu:50   6:30:00 PM:  3   hip hop   :20                
-##                    Tue:28   8:30:00 PM:  3   indie     :20                
-##                    Wed:31   (Other)   :  9   (Other)   :64                
-##   logPSAvgTix    logPSAvgGross      logFBLikes       logTwitter    
-##  Min.   :3.332   Min.   : 5.366   Min.   : 5.037   Min.   : 5.357  
-##  1st Qu.:5.104   1st Qu.: 7.863   1st Qu.: 9.367   1st Qu.: 7.936  
-##  Median :5.568   Median : 8.507   Median :10.275   Median : 8.940  
-##  Mean   :5.556   Mean   : 8.460   Mean   :10.211   Mean   : 8.927  
-##  3rd Qu.:6.068   3rd Qu.: 9.085   3rd Qu.:11.124   3rd Qu.: 9.913  
-##  Max.   :7.741   Max.   :12.196   Max.   :13.924   Max.   :12.696  
-##  NA&#39;s   :71      NA&#39;s   :71       NA&#39;s   :22       NA&#39;s   :46      
-##  logSPFollowers   logSPMonthListen logIGFollowers   logSKFollowers  
-##  Min.   : 3.258   Min.   : 2.773   Min.   : 3.135   Min.   : 2.565  
-##  1st Qu.: 7.967   1st Qu.: 9.725   1st Qu.: 8.299   1st Qu.: 7.341  
-##  Median : 9.549   Median :11.103   Median : 9.146   Median : 9.180  
-##  Mean   : 9.268   Mean   :10.746   Mean   : 9.123   Mean   : 8.762  
-##  3rd Qu.:10.747   3rd Qu.:12.328   3rd Qu.:10.053   3rd Qu.:10.350  
-##  Max.   :14.096   Max.   :15.186   Max.   :13.816   Max.   :12.620  
-##  NA&#39;s   :43       NA&#39;s   :45       NA&#39;s   :49       NA&#39;s   :38      
-##  logBandsinTown   logYTSubscribers 
-##  Min.   : 3.526   Min.   : 0.6932  
-##  1st Qu.: 8.476   1st Qu.: 5.5103  
-##  Median : 9.711   Median : 7.0456  
-##  Mean   : 9.572   Mean   : 7.0978  
-##  3rd Qu.:10.749   3rd Qu.: 8.6039  
-##  Max.   :12.987   Max.   :13.4419  
-##  NA&#39;s   :38       NA&#39;s   :73</code></pre>
-<pre class="r"><code>summary(ValidSet)</code></pre>
-<pre><code>##      month      year        Attend    SpecialTx    PSAvgTix     
-##  11     :17   2015: 4   Min.   : 12   No :92    Min.   :  47.0  
-##  10     :12   2016:29   1st Qu.: 78   Yes:22    1st Qu.: 203.0  
-##  2      :12   2017:33   Median :147             Median : 291.0  
-##  4      :10   2018:22   Mean   :187             Mean   : 351.6  
-##  6      :10   2019:19   3rd Qu.:271             3rd Qu.: 487.0  
-##  9      :10   2020: 7   Max.   :486             Max.   :1400.0  
-##  (Other):43                                     NA&#39;s   :29      
-##    PSAvgGross       FBLikes           Twitter        SPFollowers    
-##  Min.   :  539   Min.   :    162   Min.   :   156   Min.   :     1  
-##  1st Qu.: 3200   1st Qu.:  15600   1st Qu.:  2572   1st Qu.:  4100  
-##  Median : 5200   Median :  31607   Median :  8919   Median : 18096  
-##  Mean   : 7573   Mean   : 112196   Mean   : 32880   Mean   : 34112  
-##  3rd Qu.: 9600   3rd Qu.:  84401   3rd Qu.: 30900   3rd Qu.: 43600  
-##  Max.   :33600   Max.   :2195000   Max.   :329100   Max.   :361300  
-##  NA&#39;s   :29      NA&#39;s   :12        NA&#39;s   :13       NA&#39;s   :13      
-##  SPMonthListen      IGFollowers      SKFollowers      BandsinTown    
-##  Min.   :      3   Min.   :    31   Min.   :     2   Min.   :    43  
-##  1st Qu.:  20772   1st Qu.:  3400   1st Qu.:  3525   1st Qu.:  6826  
-##  Median :  80802   Median : 11800   Median :  9418   Median : 19000  
-##  Mean   : 211193   Mean   : 42660   Mean   : 22069   Mean   : 37087  
-##  3rd Qu.: 241774   3rd Qu.: 33900   3rd Qu.: 31918   3rd Qu.: 55781  
-##  Max.   :2257000   Max.   :539400   Max.   :120600   Max.   :174600  
-##  NA&#39;s   :14        NA&#39;s   :21       NA&#39;s   :12       NA&#39;s   :13      
-##  YTSubscribers      Seated       Capacity         Staff      JointEvent 
-##  Min.   :     3.0   No :108   Min.   :250.0   Min.   :1.00   FALSE:105  
-##  1st Qu.:   230.2   Yes:  6   1st Qu.:430.0   1st Qu.:1.00   TRUE :  9  
-##  Median :  1876.5             Median :430.0   Median :1.00              
-##  Mean   : 33217.2             Mean   :428.9   Mean   :1.64              
-##  3rd Qu.:  8540.0             3rd Qu.:450.0   3rd Qu.:2.00              
-##  Max.   :582544.0             Max.   :450.0   Max.   :3.00              
-##  NA&#39;s   :22                                                             
-##     Group           FBFans50Mi.lt1000 FBFansNC.lt1000 SPMostPlays.lt1000
-##  Length:114         0:102             0:106           0:113             
-##  Class :character   1: 12             1:  8           1:  1             
-##  Mode  :character                                                       
-##                                                                         
-##                                                                         
-##                                                                         
-##                                                                         
-##      Touring.Local  Day           Showtime         Genre    Returning.Act
-##             :  0   Fri:26   8:00:00 PM:74   Indie     :20   0   :84      
-##  Local      :  3   Mon: 6   9:00:00 PM:25   Roots/Rock:20   1   :27      
-##  Touring Act:111   Sat:10   7:30:00 PM: 6   Americana :19   NA&#39;s: 3      
-##                    Sun:24   2:00:00 PM: 2   hip hop   :12                
-##                    Thu:18   6:30:00 PM: 2   Metal     : 9                
-##                    Tue:14   7:00:00 PM: 2   indie     : 7                
-##                    Wed:16   (Other)   : 3   (Other)   :27                
-##   logPSAvgTix    logPSAvgGross      logFBLikes       logTwitter    
-##  Min.   :3.850   Min.   : 6.290   Min.   : 5.088   Min.   : 5.050  
-##  1st Qu.:5.313   1st Qu.: 8.071   1st Qu.: 9.655   1st Qu.: 7.852  
-##  Median :5.673   Median : 8.556   Median :10.361   Median : 9.096  
-##  Mean   :5.673   Mean   : 8.627   Mean   :10.476   Mean   : 9.158  
-##  3rd Qu.:6.188   3rd Qu.: 9.170   3rd Qu.:11.343   3rd Qu.:10.339  
-##  Max.   :7.244   Max.   :10.422   Max.   :14.602   Max.   :12.704  
-##  NA&#39;s   :29      NA&#39;s   :29       NA&#39;s   :12       NA&#39;s   :13      
-##  logSPFollowers   logSPMonthListen logIGFollowers   logSKFollowers   
-##  Min.   : 0.000   Min.   : 1.099   Min.   : 3.434   Min.   : 0.6931  
-##  1st Qu.: 8.319   1st Qu.: 9.941   1st Qu.: 8.132   1st Qu.: 8.1676  
-##  Median : 9.803   Median :11.300   Median : 9.376   Median : 9.1498  
-##  Mean   : 9.324   Mean   :10.904   Mean   : 9.262   Mean   : 8.8665  
-##  3rd Qu.:10.683   3rd Qu.:12.396   3rd Qu.:10.431   3rd Qu.:10.3709  
-##  Max.   :12.797   Max.   :14.630   Max.   :13.198   Max.   :11.7002  
-##  NA&#39;s   :13       NA&#39;s   :14       NA&#39;s   :21       NA&#39;s   :12       
-##  logBandsinTown   logYTSubscribers
-##  Min.   : 3.761   Min.   : 1.099  
-##  1st Qu.: 8.828   1st Qu.: 5.433  
-##  Median : 9.852   Median : 7.535  
-##  Mean   : 9.688   Mean   : 7.399  
-##  3rd Qu.:10.929   3rd Qu.: 9.052  
-##  Max.   :12.070   Max.   :13.275  
-##  NA&#39;s   :13       NA&#39;s   :22</code></pre>
-<pre class="r"><code>#model1 &lt;- randomForest(Attend ~., data = TrainSet, importance = TRUE)</code></pre>
+<pre class="r"><code>set.seed(100)
+train &lt;- sample(nrow(mice_complete), 0.7*nrow(mice_complete), replace = FALSE)
+TrainSet &lt;- mice_complete[train,]
+ValidSet &lt;- mice_complete[-train,]</code></pre>
+<pre class="r"><code>forest_model &lt;- randomForest(Attend ~., data = TrainSet, importance = TRUE)</code></pre>
+<pre class="r"><code># Predicting on train set
+predTrain &lt;- predict(forest_model, TrainSet, type = &quot;class&quot;)</code></pre>
 </div>
 </div>
 
