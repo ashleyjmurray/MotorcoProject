@@ -248,35 +248,38 @@ tidy(model_selected)
 library(rms)
 tidy(vif(model_selected))
 ```
+
 ```{r interactions}
 model_int <- lm(Attend ~ (Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen)*Capacity, data = mice_complete)
 tidy(model_int)
 anova(model_selected, model_int, test = "Chisq")
 ```
 
-
 ## Random Forest
+
+```{r convert}
+#need to convert all to numeric types for random forest
+for(i in 1:ncol(mice_complete)){
+  if(typeof(mice_complete[[i]]) == 'character'){
+    mice_complete[[i]] <- as.factor(mice_complete[[i]])
+  }
+}
+```
 
 ```{r random-forest-starting}
 library(randomForest)
-#split into Train and Validation sets
 set.seed(100)
 train <- sample(nrow(mice_complete), 0.7*nrow(mice_complete), replace = FALSE)
-TrainSet <- notest[train,]
-ValidSet <- notest[-train,]
-summary(TrainSet)
-summary(ValidSet)
+TrainSet <- mice_complete[train,]
+ValidSet <- mice_complete[-train,]
 ```
-
 
 ```{r create-random-forest}
-model1 <- randomForest(Attend ~., data = TrainSet, importance = TRUE)
+forest_model <- randomForest(Attend ~., data = TrainSet, importance = TRUE)
 ```
 
-
-
-
-
-
-
+```{r}
+# Predicting on train set
+predTrain <- predict(forest_model, TrainSet, type = "class")
+```
 
