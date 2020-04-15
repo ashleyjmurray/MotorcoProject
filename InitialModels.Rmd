@@ -245,6 +245,21 @@ tidy(model_int)
 anova(model_selected, model_int, test = "Chisq")
 ```
 
+```{r cross-fold}
+RMSE = function(o, m){
+  sqrt(mean((o - m)^2))
+}
+
+test <- mice_complete %>% 
+  filter(Group == "CV1")
+train <- mice_complete %>% 
+  filter(Group != "CV1")
+mod <- lm(Attend ~ Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logTwitter + logIGFollowers + logSKFollowers + Capacity, data = train)
+RMSE(train$Attend, predict(mod,train))
+RMSE(test$Attend, predict(mod,test))
+```
+
+
 ```{r prediction}
 
 test <- mice_full %>%
@@ -255,13 +270,6 @@ as.integer(predict(model_selected, test))
 estimate_simp <- test %>%
   mutate(predicted = as.integer(predict(model_selected, test)))
 ```
-
-```{r cross-fold}
-RMSE = function(m, o){
-  sqrt(mean((m - o)^2))
-}
-```
-
 
 
 ## Random Forest
