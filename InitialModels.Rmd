@@ -142,8 +142,6 @@ p0 + p1 + p2 + p3 + p4 + p5
 p6 + p7 + p8 + p9 + p10 + p11
 p12 + p13 + p14 + p15 + p16 + p17
 p18 + p19 + p20 + p21 + p22 + p23
-
-
 ```
 
 ```{r log-graphs}
@@ -216,6 +214,7 @@ notest <- dropped %>%
 ```
 
 ```{r missing-data}
+set.seed(123)
 library(mice)
 mice_mod <- mice(dropped, method='rf')
 mice_full <- complete(mice_mod)
@@ -241,7 +240,7 @@ tidy(vif(model_selected))
 ```
 
 ```{r interactions}
-model_int <- lm(Attend ~ (Capacity + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logFBLikes + logTwitter + logSPFollowers + logSPMonthListen)*Capacity, data = mice_complete)
+model_int <- lm(Attend ~ (Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logTwitter + logIGFollowers + logSKFollowers + Capacity)*Capacity, data = mice_complete)
 tidy(model_int)
 anova(model_selected, model_int, test = "Chisq")
 ```
