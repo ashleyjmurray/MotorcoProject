@@ -268,12 +268,81 @@ mod <- lm(Attend ~ Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act
 RMSE(train$Attend, predict(mod,train))
 RMSE(test$Attend, predict(mod,test))
 
+test <- mice_complete %>% 
+  filter(Group == "CV2")
+train <- mice_complete %>% 
+  filter(Group != "CV2")
+mod <- lm(Attend ~ Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logTwitter + logIGFollowers + logSKFollowers + Capacity, data = train)
+RMSE(train$Attend, predict(mod,train))
+RMSE(test$Attend, predict(mod,test))
 
+test <- mice_complete %>% 
+  filter(Group == "CV3")
+train <- mice_complete %>% 
+  filter(Group != "CV3")
+mod <- lm(Attend ~ Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logTwitter + logIGFollowers + logSKFollowers + Capacity, data = train)
+RMSE(train$Attend, predict(mod,train))
+RMSE(test$Attend, predict(mod,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV4")
+train <- mice_complete %>% 
+  filter(Group != "CV4")
+mod <- lm(Attend ~ Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logTwitter + logIGFollowers + logSKFollowers + Capacity, data = train)
+RMSE(train$Attend, predict(mod,train))
+RMSE(test$Attend, predict(mod,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV5")
+train <- mice_complete %>% 
+  filter(Group != "CV5")
+mod <- lm(Attend ~ Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logTwitter + logIGFollowers + logSKFollowers + Capacity, data = train)
+RMSE(train$Attend, predict(mod,train))
+RMSE(test$Attend, predict(mod,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV6")
+train <- mice_complete %>% 
+  filter(Group != "CV6")
+mod <- lm(Attend ~ Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logTwitter + logIGFollowers + logSKFollowers + Capacity, data = train)
+RMSE(train$Attend, predict(mod,train))
+RMSE(test$Attend, predict(mod,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV7")
+train <- mice_complete %>% 
+  filter(Group != "CV7")
+mod <- lm(Attend ~ Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logTwitter + logIGFollowers + logSKFollowers + Capacity, data = train)
+RMSE(train$Attend, predict(mod,train))
+RMSE(test$Attend, predict(mod,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV8")
+train <- mice_complete %>% 
+  filter(Group != "CV8")
+mod <- lm(Attend ~ Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logTwitter + logIGFollowers + logSKFollowers + Capacity, data = train)
+RMSE(train$Attend, predict(mod,train))
+RMSE(test$Attend, predict(mod,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV9")
+train <- mice_complete %>% 
+  filter(Group != "CV9")
+mod <- lm(Attend ~ Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logTwitter + logIGFollowers + logSKFollowers + Capacity, data = train)
+RMSE(train$Attend, predict(mod,train))
+RMSE(test$Attend, predict(mod,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV10")
+train <- mice_complete %>% 
+  filter(Group != "CV10")
+mod <- lm(Attend ~ Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logTwitter + logIGFollowers + logSKFollowers + Capacity, data = train)
+RMSE(train$Attend, predict(mod,train))
+RMSE(test$Attend, predict(mod,test))
 ```
 
 
 ```{r prediction}
-
 test <- mice_full %>%
   filter(Group == "Test")
 
@@ -314,6 +383,13 @@ estimate <- test %>%
 all <- estimate %>%
   mutate(PredAttend = predicted_comp,
          PredAttend.Basic = predicted_simp)
+
+all <- all %>%
+  mutate(predicted_simp = case_when(
+    predicted_simp < 0 ~ 0, 
+    predicted_simp > 450 ~ 450
+    TRUE ~ "Other"
+  ))
 
 testPredF <- all %>%
   select("recordID", "PredAttend", "PredAttend.Basic")
