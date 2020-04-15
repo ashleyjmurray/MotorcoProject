@@ -368,10 +368,91 @@ ValidSet <- mice_complete[-train,]
 forest_model <- randomForest(Attend ~., data = TrainSet, importance = TRUE)
 ```
 
+```{r crossfold}
+RMSE = function(o, m){
+  sqrt(mean((o - m)^2))
+}
+
+test <- mice_complete %>% 
+  filter(Group == "CV1")
+train <- mice_complete %>% 
+  filter(Group != "CV1")
+RMSE(train$Attend, predict(forest_model,train))
+RMSE(test$Attend, predict(forest_model,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV2")
+train <- mice_complete %>% 
+  filter(Group != "CV2")
+RMSE(train$Attend, predict(forest_model,train))
+RMSE(test$Attend, predict(forest_model,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV3")
+train <- mice_complete %>% 
+  filter(Group != "CV3")
+
+RMSE(train$Attend, predict(forest_model,train))
+RMSE(test$Attend, predict(forest_model,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV4")
+train <- mice_complete %>% 
+  filter(Group != "CV4")
+RMSE(train$Attend, predict(forest_model,train))
+RMSE(test$Attend, predict(forest_model,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV5")
+train <- mice_complete %>% 
+  filter(Group != "CV5")
+
+RMSE(train$Attend, predict(forest_model,train))
+RMSE(test$Attend, predict(forest_model,test))
+
+
+test <- mice_complete %>% 
+  filter(Group == "CV6")
+train <- mice_complete %>% 
+  filter(Group != "CV6")
+RMSE(train$Attend, predict(forest_model,train))
+RMSE(test$Attend, predict(forest_model,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV7")
+train <- mice_complete %>% 
+  filter(Group != "CV7")
+RMSE(train$Attend, predict(forest_model,train))
+RMSE(test$Attend, predict(forest_model,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV8")
+train <- mice_complete %>% 
+  filter(Group != "CV8")
+RMSE(train$Attend, predict(forest_model,train))
+RMSE(test$Attend, predict(forest_model,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV9")
+train <- mice_complete %>% 
+  filter(Group != "CV9")
+RMSE(train$Attend, predict(forest_model,train))
+RMSE(test$Attend, predict(forest_model,test))
+
+test <- mice_complete %>% 
+  filter(Group == "CV10")
+train <- mice_complete %>% 
+  filter(Group != "CV10")
+RMSE(train$Attend, predict(forest_model,train))
+RMSE(test$Attend, predict(forest_model,test))
+```
+
+
 ```{r}
 # Predicting on train set
 predTrain <- predict(forest_model, test, type = "class")
 ```
+
 
 ```{r add-predictions}
 load("testPred.RData")
@@ -395,6 +476,9 @@ testPredF <- all %>%
   select("recordID", "PredAttend", "PredAttend.Basic")
 
 ```
+
+
+
 
 ```{r}
 
