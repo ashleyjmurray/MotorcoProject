@@ -18,7 +18,7 @@ library(patchwork)
 ```
 
 ```{r}
-load("PrimaryData-3.RData")
+load("PrimaryData (1).RData")
 daygenre <- read.csv("DayAndGenre.csv")
 daygenre <- daygenre %>%
   mutate(Date = as.character(Date),
@@ -217,8 +217,10 @@ notest <- dropped %>%
 
 ```{r missing-data}
 library(mice)
-mice_mod <- mice(notest, method='rf')
-mice_complete <- complete(mice_mod)
+mice_mod <- mice(dropped, method='rf')
+mice_full <- complete(mice_mod)
+mice_complete <- mice_full %>%
+  filter(Group != "Test")
 
 colSums(is.na(mice_complete))
 ```
@@ -243,11 +245,6 @@ model_int <- lm(Attend ~ (Capacity + FBFansNC.lt1000 + Touring.Local + Day + Ret
 tidy(model_int)
 anova(model_selected, model_int, test = "Chisq")
 ```
-
-```{r kfold}
-rmse(mice_complete$Attend, predict(model_selected, ))
-```
-
 
 ```{r prediction}
 

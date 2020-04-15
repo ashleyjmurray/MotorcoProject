@@ -76,7 +76,7 @@
 6/19/16,Band196,Sun,8:00:00 PM,Americana,
 6/25/16,Band110,Sat,9:00:00 PM,Roots/Rock,
 7/1/16,Band238,Fri,9:00:00 PM,Americana,x
-7/5/16,Band293,Tue,7:30:00 PM,Metal,x 
+7/5/16,Band293,Tue,7:30:00 PM,Metal,x
 7/12/16,Band98,Tue,8:00:00 PM,Americana,
 7/17/16,Band319,Sun,8:00:00 PM,Americana,
 7/18/16,Band253,Mon,8:00:00 PM,Roots/Rock,
@@ -220,7 +220,7 @@
 10/28/17,Band366,Sat,9:00:00 PM,Roots/Rock,x
 10/29/17,Band300,Sun,7:00:00 PM,Metal,
 11/1/17,Band180,Wed,6:30:00 PM,Comedy,
-11/1/17,Band194,Wed,6:30:00 PM,,
+11/1/17,Band194,Wed,6:30:00 PM,Comedy,
 11/2/17,Band350,Thu,8:00:00 PM,Roots/Rock,
 11/3/17,Band58,Fri,8:00:00 PM,Indie,x
 11/4/17,Band64,Sat,9:00:00 PM,Metal,
@@ -230,7 +230,7 @@
 11/10/17,Band36,Fri,9:00:00 PM,hip hop,
 11/11/17,Band265,Sat,9:00:00 PM,Electronic,
 11/12/17,Band245,Sun,8:00:00 PM,Americana,x
-11/12/17,Band245,Sun,8:00:00 PM,Americana,x
+11/12/17,Band288,Sun,8:00:00 PM,Americana,x
 11/13/17,Band119,Mon,8:00:00 PM,hip hop,x
 11/17/17,Band215,Fri,9:00:00 PM,R&B/Soul,
 11/18/17,Band66,Sat,9:00:00 PM,Indie,
@@ -251,7 +251,7 @@
 2/11/18,Band343,Sun,8:00:00 PM,Indie,
 2/15/18,Band42,Thu,8:00:00 PM,World,
 2/16/18,Band152,Fri,7:30:00 PM,Indie,
-2/16/18,Band212,Fri,7:30:00 PM,,x
+2/16/18,Band212,Fri,7:30:00 PM,Indie,x
 2/22/18,Band115,Thu,8:00:00 PM,Americana,x
 2/26/18,Band34,Mon,8:00:00 PM,Americana,
 2/28/18,Band92,Wed,8:00:00 PM,Americana,x
@@ -338,7 +338,7 @@
 9/22/18,Band62,Sat,8:00:00 PM,Americana,
 9/26/18,Band29,Wed,8:00:00 PM,Metal,
 9/28/18,Band347,Fri,8:30:00 PM,indie,
-9/30/18,Band293,Sun,7:30:00 PM,Metal,x 
+9/30/18,Band293,Sun,7:30:00 PM,Metal,x
 10/3/18,Band193,Wed,8:00:00 PM,Roots/Rock,
 10/6/18,Band431,Sat,8:30:00 PM,Roots/Rock,x
 10/10/18,Band99,Wed,6:00:00 PM,Metal,x
@@ -352,15 +352,15 @@
 10/24/18,Band23,Wed,8:00:00 PM,Americana,
 10/26/18,Band75,Fri,8:00:00 PM,Americana,x
 10/27/18,Band385,Sat,9:00:00 PM,Indie,x
-10/27/18,Band385,Sat,9:00:00 PM,Indie,x
+10/27/18,Band435,Sat,9:00:00 PM,Indie,x
 11/1/18,Band450,Thu,8:00:00 PM,indie,x
 11/3/18,Band391,Sat,12:30:00 PM,Punk,
 11/4/18,Band316,Sun,8:00:00 PM,indie,
-11/6/18,Band376,Tue,8:00:00 PM,indie,x 
+11/6/18,Band376,Tue,8:00:00 PM,indie,x
 11/8/18,Band251,Thu,8:00:00 PM,Roots/Rock,
 11/9/18,Band247,Fri,9:00:00 PM,hip hop,
 11/10/18,Band197,Sat,9:00:00 PM,hip hop,x
-11/14/18,Band1,Wed,8:00:00 PM,Indie,x 
+11/14/18,Band1,Wed,8:00:00 PM,Indie,x
 11/16/18,Band474,Fri,8:00:00 PM,hip hop,
 11/17/18,Band349,Sat,8:00:00 PM,Punk,
 11/18/18,Band453,Sun,8:00:00 PM,indie,
@@ -378,7 +378,7 @@
 12/26/18,Band230,Wed,9:00:00 PM,hip hop,
 12/28/18,Band47,Fri,9:00:00 PM,hip hop,
 12/30/18,Band117,Sun,8:00:00 PM,comedy,
-12/31/18,Band295,Mon,10:00:00 PM,,
+12/31/18,Band295,Mon,10:00:00 PM,electronic,
 1/14/19,Band204,Mon,8:00:00 PM,indie,
 1/25/19,Band414,Fri,8:00:00 PM,Roots/Rock,
 1/26/19,Band14,Sat,9:00:00 PM,indie,
@@ -471,7 +471,7 @@
 10/26/19,Band133,Sat,9:00:00 PM,Electronic,
 11/1/19,Band345,Fri,9:00:00 PM,Metal,x
 11/2/19,Band376,Sat,6:00:00 PM,Indie,x
-11/3/19,Band289,Sun,7:00:00 PM,Metal, 
+11/3/19,Band289,Sun,7:00:00 PM,Metal,
 11/8/19,Band224,Fri,8:00:00 PM,Indie,x
 11/9/19,Band405,Sat,8:00:00 PM,Indie,
 11/12/19,Band442,Tue,8:00:00 PM,Electronic,
