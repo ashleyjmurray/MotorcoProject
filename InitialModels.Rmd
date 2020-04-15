@@ -213,15 +213,7 @@ full <- full %>%
          logYTSubscribers = log(YTSubscribers)
          )
 
-seated <- full %>%
-  filter(Seated == "Yes") %>%
-  filter(Group != "Test")
-
-standing <- full %>%
-  filter(Seated == "No") %>%
-  filter(Group != "Test")
-
-dropped <-select(full,-c("Ref.x", "day", "Artist", "TxPrice", "FBAttend", "FBInterest", "FBInvites", "FBFans50Mi", "FBFansNC", "SPMostPlays", "recordID", "new_year", "Date", "Reference..", "Ref.y", "Artists", "Bands60Mi", "PSAvgTix", "PSAvgGross", "FBLikes", "Twitter", "SPFollowers", "SPMonthListen", "IGFollowers", "SKFollowers", "BandsinTown", "YTSubscribers"))
+dropped <-select(full,-c("Ref.x", "day", "Artist", "TxPrice", "FBAttend", "FBInterest", "FBInvites", "FBFans50Mi", "FBFansNC", "SPMostPlays", "new_year", "Date", "Reference..", "Ref.y", "Artists", "Bands60Mi", "PSAvgTix", "PSAvgGross", "FBLikes", "Twitter", "SPFollowers", "SPMonthListen", "IGFollowers", "SKFollowers", "BandsinTown", "YTSubscribers"))
 
 notest <- dropped %>%
   filter(Group != "Test")
@@ -252,7 +244,7 @@ for(i in 1:ncol(mice_complete)){
 # Model Selection for the Linear Regression Model
 
 ```{r model-selection}
-full_model <- lm(Attend ~ . -Group, data=mice_complete)
+full_model <- lm(Attend ~ . -Group -recordID, data=mice_complete)
 tidy(full_model)
 ```
 
@@ -365,13 +357,13 @@ RMSE(test$Attend, predict(mod,test))
 #Prediction for the Linear Regression Model
 
 ```{r prediction}
-test <- mice_full %>%
+lmpredict <- mice_full %>%
   filter(Group == "Test")
 
-as.integer(predict(model_selected, test))
+as.integer(predict(model_selected, lmpredict))
                        
-estimate_simp <- test %>%
-  mutate(predicted = as.integer(predict(model_selected, test)))
+estimate_simp <- lmpredict %>%
+  mutate(predicted = as.integer(predict(model_selected, lmpredict)))
 ```
 
 
@@ -388,7 +380,7 @@ ValidSet <- mice_complete[-train,]
 # Create the Random Forest Model 
 
 ```{r create-random-forest}
-forest_model <- randomForest(Attend ~., data = TrainSet, importance = TRUE)
+forest_model <- randomForest(Attend ~ . -recordID -Group, data = TrainSet, importance = TRUE)
 ```
 
 # Crossfold Validation for the Random Forest Model
@@ -476,27 +468,28 @@ RMSE(test$Attend, predict(forest_model,test))
 
 ```{r}
 # Predicting on train set
-predTrain <- predict(forest_model, test, type = "class")
+predTrain <- predict(forest_model, lmpredict, type = "class")
 ```
 
 
 ```{r add-predictions}
 load("testPred.RData")
 
-estimate <- test %>%
-  mutate(predicted_simp = as.integer(predict(model_selected, test)),
-         predicted_comp = as.integer(predict(forest_model, test, type = "class")))
+estimate <- lmpredict %>%
+  mutate(predicted_simp = as.integer(predict(model_selected, lmpredict)),
+         predicted_comp = as.integer(predict(forest_model, lmpredict, type = "class")))
 
 all <- estimate %>%
-  mutate(PredAttend = predicted_comp,
-         PredAttend.Basic = predicted_simp)
+  mutate(predicted_simp = case_when(
+    predicted_simp < 0 ~ 0.0, 
+    predicted_simp > 450 ~ 450.0,
+    TRUE ~ as.numeric(predicted_simp)
+  ))
+
 
 all <- all %>%
-  mutate(predicted_simp = case_when(
-    predicted_simp < 0 ~ 0, 
-    predicted_simp > 450 ~ 450
-    TRUE ~ "Other"
-  ))
+  mutate(PredAttend = predicted_comp,
+         PredAttend.Basic = predicted_simp)
 
 testPredF <- all %>%
   select("recordID", "PredAttend", "PredAttend.Basic")
