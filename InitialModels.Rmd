@@ -244,6 +244,11 @@ tidy(model_int)
 anova(model_selected, model_int, test = "Chisq")
 ```
 
+```{r kfold}
+rmse(mice_complete$Attend, predict(model_selected, ))
+```
+
+
 ```{r prediction}
 
 test <- mice_full %>%
