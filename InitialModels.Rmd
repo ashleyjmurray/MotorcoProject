@@ -224,6 +224,16 @@ mice_complete <- mice_full %>%
 colSums(is.na(mice_complete))
 ```
 
+```{r convert}
+#need to convert all to numeric types for random forest
+for(i in 1:ncol(mice_complete)){
+  if(typeof(mice_complete[[i]]) == 'character'){
+    mice_complete[[i]] <- as.factor(mice_complete[[i]])
+  }
+}
+```
+
+
 ```{r model-selection}
 full_model <- lm(Attend ~ . -Group, data=mice_complete)
 tidy(full_model)
@@ -274,14 +284,6 @@ estimate_simp <- test %>%
 
 ## Random Forest
 
-```{r convert}
-#need to convert all to numeric types for random forest
-for(i in 1:ncol(mice_complete)){
-  if(typeof(mice_complete[[i]]) == 'character'){
-    mice_complete[[i]] <- as.factor(mice_complete[[i]])
-  }
-}
-```
 
 ```{r random-forest-starting}
 library(randomForest)
