@@ -1,13 +1,19 @@
 ---
 title: "Initial Models"
+author: "Matty Pahren and Ashley Murray"
 output: html_document
 ---
+
+## Initial Model Exploration
+
+For our two models, we chose a multivariate linear regression model and a random forests machine learning model. We dealt with missing data by utilizing the MICE algorithm and package. 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r packages}
+#packages
 library(tidyverse)
 library(ggplot2)
 library(caret)
@@ -16,6 +22,10 @@ library(knitr)
 library(broom)
 library(patchwork)
 ```
+
+# Load in the Data
+
+Initially, we loaded in the primary data dataset, merging with the dayandgenre and localacts dataset. 
 
 ```{r}
 load("PrimaryData (1).RData")
@@ -29,6 +39,8 @@ localacts <- localacts %>%
          Artist = as.character(Artist),
          Ref = Reference..)
 ```
+
+Data cleaning/joining: 
 
 ```{r}
 y <- y %>%
@@ -184,6 +196,8 @@ p10 + p11 + p13 + p14
 p15 + p16 + p17
 ```
 
+# Transforming Data for the Linear Regression Model
+
 ```{r transform}
 full <- full %>%
   mutate(logPSAvgTix = log(PSAvgTix),
@@ -213,6 +227,8 @@ notest <- dropped %>%
   filter(Group != "Test")
 ```
 
+# Dealting with the Missing Data
+
 ```{r missing-data}
 set.seed(123)
 library(mice)
@@ -233,6 +249,7 @@ for(i in 1:ncol(mice_complete)){
 }
 ```
 
+# Model Selection for the Linear Regression Model
 
 ```{r model-selection}
 full_model <- lm(Attend ~ . -Group, data=mice_complete)
@@ -249,11 +266,15 @@ library(rms)
 tidy(vif(model_selected))
 ```
 
+# Interaction Terms for Linear Regression Model
+
 ```{r interactions}
 model_int <- lm(Attend ~ (Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logTwitter + logIGFollowers + logSKFollowers + Capacity)*Capacity, data = mice_complete)
 tidy(model_int)
 anova(model_selected, model_int, test = "Chisq")
 ```
+
+# Crossfold Validation
 
 ```{r cross-fold}
 RMSE = function(o, m){
@@ -341,6 +362,7 @@ RMSE(train$Attend, predict(mod,train))
 RMSE(test$Attend, predict(mod,test))
 ```
 
+#Prediction for the Linear Regression Model
 
 ```{r prediction}
 test <- mice_full %>%
@@ -353,8 +375,7 @@ estimate_simp <- test %>%
 ```
 
 
-## Random Forest
-
+## Random Forest Model
 
 ```{r random-forest-starting}
 library(randomForest)
@@ -364,9 +385,13 @@ TrainSet <- mice_complete[train,]
 ValidSet <- mice_complete[-train,]
 ```
 
+# Create the Random Forest Model 
+
 ```{r create-random-forest}
 forest_model <- randomForest(Attend ~., data = TrainSet, importance = TRUE)
 ```
+
+# Crossfold Validation for the Random Forest Model
 
 ```{r crossfold}
 RMSE = function(o, m){
@@ -447,6 +472,7 @@ RMSE(train$Attend, predict(forest_model,train))
 RMSE(test$Attend, predict(forest_model,test))
 ```
 
+# Prediction for the Random Forest Model
 
 ```{r}
 # Predicting on train set
@@ -474,15 +500,9 @@ all <- all %>%
 
 testPredF <- all %>%
   select("recordID", "PredAttend", "PredAttend.Basic")
-
 ```
 
-
-
-
 ```{r}
-
 save(testPredF, file = "testPredF.RData") 
-
 ```
 
