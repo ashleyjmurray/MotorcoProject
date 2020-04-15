@@ -257,6 +257,8 @@ train <- mice_complete %>%
 mod <- lm(Attend ~ Staff + FBFansNC.lt1000 + Touring.Local + Day + Returning.Act + logPSAvgTix + logPSAvgGross + logTwitter + logIGFollowers + logSKFollowers + Capacity, data = train)
 RMSE(train$Attend, predict(mod,train))
 RMSE(test$Attend, predict(mod,test))
+
+
 ```
 
 
