@@ -255,6 +255,14 @@ estimate_simp <- test %>%
   mutate(predicted = as.integer(predict(model_selected, test)))
 ```
 
+```{r cross-fold}
+RMSE = function(m, o){
+  sqrt(mean((m - o)^2))
+}
+```
+
+
+
 ## Random Forest
 
 ```{r convert}
